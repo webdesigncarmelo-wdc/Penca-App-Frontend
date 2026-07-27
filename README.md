@@ -1,2 +1,2 @@
 # futbol-carmelo-penca
-penca web &amp; mobile, with react native, express &amp; mongoDB
+penca web &amp; mobile, with react native expo, node express &amp; mongoDB
