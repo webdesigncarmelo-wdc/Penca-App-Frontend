@@ -25,7 +25,7 @@ export default function MatchesScreen() {
         data={matches}
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
-          <MatchCard homeTeam={item.homeTeam} awayTeam={item.awayTeam} />
+          <MatchCard homeTeam={item.homeTeam} awayTeam={item.awayTeam} homeGoals={item.homeGoals} awayGoals={item.awayGoals} />
         )}
       />
     </View>

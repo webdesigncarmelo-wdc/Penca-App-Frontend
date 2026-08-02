@@ -1,9 +1,8 @@
 import { View, Text, StyleSheet } from "react-native";
 import ShieldBadge from "./ShieldBadge";
-import MatchScore from "./MatchScore";
 import { teamImages } from "../assets/clubs/teamImages";
 
-export default function MatchCard({ homeTeam, awayTeam, homeGoals, awayGoals }) {
+export default function MatchPlayedCard({ homeTeam, awayTeam }) {
   return (
     <View style={styles.cardContainer}>
       
@@ -16,18 +15,12 @@ export default function MatchCard({ homeTeam, awayTeam, homeGoals, awayGoals }) 
         <Text style={[styles.teamName, styles.leftAlign]} numberOfLines={1}>
           {homeTeam.name}
         </Text>
-
-        <MatchScore score={homeGoals}/>
         
         <Text style={styles.vsText}>vs</Text>
-
         
         <Text style={[styles.teamName, styles.rightAlign]} numberOfLines={1}>
           {awayTeam.name}
         </Text>
-
-        <MatchScore score={awayGoals}/>
-
       </View>
 
       <View style={styles.ShieldColumn}>
