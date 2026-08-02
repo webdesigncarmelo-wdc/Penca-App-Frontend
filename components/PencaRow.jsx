@@ -7,15 +7,16 @@ export default function PencaRow({ penca }) {
     <View style={styles.row}>
 
       <View style={styles.ShieldColumn}>
-        <ShieldBadge image={ teamImages[penca.image] }/>
+        <ShieldBadge image={teamImages[penca.image]} size={100} />
       </View>
 
       <View style={styles.nameColumn}>
-        <Text>{penca.name}</Text>
+        <Text style={styles.name}>
+          {penca.name}</Text>
       </View>
 
       <View style={styles.column} >
-        <Text>{penca.points}</Text>
+        <Text style={styles.name}>{penca.points}</Text>
       </View>
 
       <View style={styles.column}>
@@ -42,7 +43,12 @@ const styles = StyleSheet.create({
 
   nameColumn:{
     flex:1,
-    margin: 10
+    margin: 10,
+  },
+
+  name:{
+    fontSize: 15,
+    fontWeight: "bold" 
   },
 
   column:{

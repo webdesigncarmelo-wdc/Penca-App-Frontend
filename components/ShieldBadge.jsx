@@ -1,12 +1,17 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 
-export default function ShieldBadge({ image }) {
+export default function ShieldBadge({ image, size = 60 }) {
   return (
-    <View style={styles.container}>
+    <View style={styles.container}
+          style={{ 
+            width: size, 
+            height: size }}>
       <View style={styles.logoContainer}>
-        <Image style={styles.image}
-          source={image}
+        <Image source={image}
           resizeMode="contain"
+          style={{
+            width: size * 0.8,
+            height: size * 0.8,}}
         />
       </View>
     </View>
@@ -24,9 +29,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     overflow: 'hidden',
 
-    width: 60,
-    height: 60,
-
     borderColor: '#16235f',
     borderWidth: 3,
 
@@ -34,10 +36,5 @@ const styles = StyleSheet.create({
 
     backgroundColor: "#ffffff",
     elevation: 8,
-  },
-
-  image: {
-    width: 60,
-    height: 60,
   }
 });

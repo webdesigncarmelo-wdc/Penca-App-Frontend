@@ -35,7 +35,7 @@ export const pencaData = [
     exactResults: 7,
   },
   {
-    name: "Damian Udaquila",
+    name: "Damian Udaquiola",
     favoriteTeam: "Cerro",
     image: "cer",
     points: 99,

@@ -1,14 +1,16 @@
 import { View, Text, StyleSheet } from "react-native";
 import ShieldBadge from "./ShieldBadge";
+import { teamImages } from "../assets/clubs/teamImages";
 
 export default function MatchCard({ homeTeam, awayTeam }) {
   return (
     <View style={styles.cardContainer}>
       
-      {/* Columna 1: Escudo Local */}
-      <ShieldBadge image={homeTeam.image} />
 
-      {/* Columna 2: Zona Central (Nombres y VS alineados en escalera) */}
+      <View style={styles.ShieldColumn}>
+        <ShieldBadge image={teamImages[homeTeam.image]} size={100} />
+      </View>
+
       <View style={styles.centerContainer}>
         <Text style={[styles.teamName, styles.leftAlign]} numberOfLines={1}>
           {homeTeam.name}
@@ -21,8 +23,9 @@ export default function MatchCard({ homeTeam, awayTeam }) {
         </Text>
       </View>
 
-      {/* Columna 3: Escudo Visitante */}
-      <ShieldBadge image={awayTeam.image} />
+      <View style={styles.ShieldColumn}>
+        <ShieldBadge image={teamImages[awayTeam.image]} size={100} />
+      </View>
 
     </View>
   );
