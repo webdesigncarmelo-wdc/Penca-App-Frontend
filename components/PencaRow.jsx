@@ -6,61 +6,119 @@ export default function PencaRow({ penca }) {
   return (
     <View style={styles.row}>
 
-      <View style={styles.ShieldColumn}>
-        <ShieldBadge image={teamImages[penca.image]} size={100} />
+      {/* Escudo equipo favorito */}
+      <View style={styles.shieldColumn}>
+        <ShieldBadge
+          image={teamImages[penca.image]}
+          size={45}
+        />
       </View>
 
+
+      {/* Participante */}
       <View style={styles.nameColumn}>
-        <Text style={styles.name}>
-          {penca.name}</Text>
+        <Text 
+          style={styles.name}
+          numberOfLines={1}
+        >
+          {penca.name}
+        </Text>
       </View>
 
-      <View style={styles.column} >
-        <Text style={styles.name}>{penca.points}</Text>
+
+      {/* Puntos */}
+      <View style={styles.pointsColumn}>
+        <Text style={styles.points}>
+          {penca.points}
+        </Text>
       </View>
 
-      <View style={styles.column}>
-        <Text>{penca.exactResults}</Text>
+
+      {/* Resultados exactos */}
+      <View style={styles.resultColumn}>
+        <Text style={styles.result}>
+          {penca.exactResults}
+        </Text>
       </View>
+
 
     </View>
   );
 }
 
+
 const styles = StyleSheet.create({
 
   row:{
     flexDirection:"row",
+
     alignItems:"center",
-    padding:5,
+
+    width:"50%",
+    minWidth:700,
+
+    alignSelf:"center",
+
+    backgroundColor:"#ffffff",
+
+    paddingHorizontal:18,
+    paddingVertical:12,
+
     borderBottomWidth:1,
+    borderBottomColor:"#eeeeee",
   },
 
-  positionColumn:{
-    width:20,
-    alignItems:"left",
+
+  shieldColumn:{
+    width:60,
+
+    alignItems:"center",
   },
+
 
   nameColumn:{
     flex:1,
-    margin: 10,
+
+    paddingLeft:10,
   },
+
 
   name:{
-    fontSize: 15,
-    fontWeight: "bold" 
+    fontSize:18,
+
+    fontWeight:"600",
+
+    color:"#222",
   },
 
-  column:{
-    width:30,
-    alignItems:"baseline",
+
+  pointsColumn:{
+    width:70,
+
+    alignItems:"center",
   },
+
 
   points:{
+    fontSize:18,
+
     fontWeight:"bold",
+
+    color:"#222",
   },
 
-  ShieldColumn:{
+
+  resultColumn:{
+    width:100,
+
+    alignItems:"center",
+  },
+
+
+  result:{
+    fontSize:15,
+
+    color:"#666",
   },
 
 });

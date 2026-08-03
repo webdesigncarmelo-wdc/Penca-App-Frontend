@@ -6,33 +6,60 @@ export default function StandingRow({ team }) {
   return (
     <View style={styles.row}>
 
+      {/* Posición */}
       <View style={styles.positionColumn}>
-        <Text>{team.position}</Text>
+        <Text style={styles.position}>
+          {team.position}
+        </Text>
       </View>
 
 
-      <View style={styles.ShieldColumn}>
-        <ShieldBadge image={ teamImages[team.image] }/>
+      {/* Escudo */}
+      <View style={styles.shieldColumn}>
+        <ShieldBadge
+          image={teamImages[team.image]}
+          size={38}
+        />
       </View>
-      
 
+
+      {/* Equipo */}
       <View style={styles.nameColumn}>
-        <Text>{team.name}</Text>
+        <Text 
+          style={styles.teamName}
+          numberOfLines={1}
+        >
+          {team.name}
+        </Text>
       </View>
 
-      <View style={styles.column}>
-        <Text>{team.played}</Text>
+
+      {/* PJ */}
+      <View style={styles.statColumn}>
+        <Text style={styles.stat}>
+          {team.played}
+        </Text>
       </View>
 
-      <View style={styles.column}>
-        <Text>{team.goalsFor}</Text>
+
+      {/* GF */}
+      <View style={styles.statColumn}>
+        <Text style={styles.stat}>
+          {team.goalsFor}
+        </Text>
       </View>
 
-      <View style={styles.column}>
-        <Text>{team.goalsAgainst}</Text>
+
+      {/* GC */}
+      <View style={styles.statColumn}>
+        <Text style={styles.stat}>
+          {team.goalsAgainst}
+        </Text>
       </View>
 
-      <View style={styles.column}>
+
+      {/* Puntos */}
+      <View style={styles.pointsColumn}>
         <Text style={styles.points}>
           {team.points}
         </Text>
@@ -42,35 +69,96 @@ export default function StandingRow({ team }) {
   );
 }
 
+
 const styles = StyleSheet.create({
 
   row:{
     flexDirection:"row",
+
     alignItems:"center",
-    padding:5,
+
+    width:"50%",
+    minWidth:700,
+
+    alignSelf:"center",
+
+    backgroundColor:"#ffffff",
+
+    paddingHorizontal:18,
+    paddingVertical:12,
+
     borderBottomWidth:1,
+    borderBottomColor:"#eeeeee",
+
   },
 
+
   positionColumn:{
-    width:20,
-    alignItems:"left",
+    width:40,
+
+    alignItems:"center",
   },
+
+
+  position:{
+    fontSize:16,
+
+    fontWeight:"600",
+
+    color:"#555",
+  },
+
+
+  shieldColumn:{
+    width:55,
+
+    alignItems:"center",
+  },
+
 
   nameColumn:{
     flex:1,
-    margin: 10
+
+    paddingLeft:10,
   },
 
-  column:{
-    width:30,
-    alignItems:"baseline",
+
+  teamName:{
+    fontSize:18,
+
+    fontWeight:"600",
+
+    color:"#222",
   },
+
+
+  statColumn:{
+    width:45,
+
+    alignItems:"center",
+  },
+
+
+  stat:{
+    fontSize:16,
+
+    color:"#555",
+  },
+
+
+  pointsColumn:{
+    width:55,
+
+    alignItems:"center",
+  },
+
 
   points:{
-    fontWeight:"bold",
-  },
+    fontSize:18,
 
-  ShieldColumn:{
+    fontWeight:"bold",
+
+    color:"#222",
   },
 
 });

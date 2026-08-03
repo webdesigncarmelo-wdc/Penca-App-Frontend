@@ -47,5 +47,47 @@ export const pencaData = [
     image: "uru",
     points: 87,
     exactResults: 5,
+  },
+  {
+    name: "Cuye",
+    favoriteTeam: "Nacional",
+    image: "nac",
+    points: 0,
+    exactResults: 2,
+  }, 
+  {
+    name: "Pastelito Pereira",
+    favoriteTeam: "Cerro",
+    image: "cer",
+    points: 90,
+    exactResults: 3,
+  },
+  {
+    name: "Mirtha Genes",
+    favoriteTeam: "Saravia",
+    image: "sar",
+    points: 60,
+    exactResults: 3,
+  },
+  {
+    name: "Batipon",
+    favoriteTeam: "Cerro",
+    image: "cer",
+    points: 97,
+    exactResults: 4,
+  },
+  {
+    name: "Ale Lopez",
+    favoriteTeam: "Centenario",
+    image: "cen",
+    points: 99,
+    exactResults: 5,
+  },
+  {
+    name: "Ñonga",
+    favoriteTeam: "Independiente",
+    image: "ind",
+    points: 79,
+    exactResults: 4,
   }
 ]

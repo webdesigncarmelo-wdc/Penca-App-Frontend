@@ -4,34 +4,58 @@ import MatchScore from "./MatchScore";
 import { teamImages } from "../assets/clubs/teamImages";
 
 export default function MatchCard({ homeTeam, awayTeam, homeGoals, awayGoals }) {
-  return (
+   return (
     <View style={styles.cardContainer}>
-      
 
-      <View style={styles.ShieldColumn}>
-        <ShieldBadge image={teamImages[homeTeam.image]} size={100} />
+      {/* Info contextual */}
+      <View style={styles.infoRow}>
+        <Text style={styles.infoText}>
+          Fecha 7 • Domingo 9/8 • 15:30 • Parque Artigas
+        </Text>
       </View>
 
-      <View style={styles.centerContainer}>
-        <Text style={[styles.teamName, styles.leftAlign]} numberOfLines={1}>
-          {homeTeam.name}
-        </Text>
+      {/* Partido */}
+      <View style={styles.matchRow}>
 
-        <MatchScore score={homeGoals}/>
-        
-        <Text style={styles.vsText}>vs</Text>
+        {/* Local */}
+        <View style={styles.teamContainer}>
+          <ShieldBadge
+            image={teamImages[homeTeam.image]}
+            size={55}
+          />
 
-        
-        <Text style={[styles.teamName, styles.rightAlign]} numberOfLines={1}>
-          {awayTeam.name}
-        </Text>
+          <Text
+            style={styles.teamName}
+            numberOfLines={1}
+          >
+            {homeTeam.name}
+          </Text>
+        </View>
 
-        <MatchScore score={awayGoals}/>
+        {/* Resultado */}
+        <View style={styles.scoreContainer}>
+          <MatchScore score={homeGoals} />
 
-      </View>
+          <Text style={styles.separator}>-</Text>
 
-      <View style={styles.ShieldColumn}>
-        <ShieldBadge image={teamImages[awayTeam.image]} size={100} />
+          <MatchScore score={awayGoals} />
+        </View>
+
+        {/* Visitante */}
+        <View style={[styles.teamContainer, styles.teamRight]}>
+          <Text
+            style={styles.teamName}
+            numberOfLines={1}
+          >
+            {awayTeam.name}
+          </Text>
+
+          <ShieldBadge
+            image={teamImages[awayTeam.image]}
+            size={55}
+          />
+        </View>
+
       </View>
 
     </View>
@@ -39,46 +63,87 @@ export default function MatchCard({ homeTeam, awayTeam, homeGoals, awayGoals }) 
 }
 
 const styles = StyleSheet.create({
+
   cardContainer: {
-    flexDirection: 'row',       // Alinea Escudo - Centro - Escudo
-    alignItems: 'center',       // Centra los escudos verticalmente con la zona central
-    justifyContent: 'space-between', // Empuja los escudos a los extremos
-    backgroundColor: '#3b39c4', // Un fondo oscuro para que tus escudos brillen
-    padding: 5,
-    borderRadius: 100,
-    width: '85%',               // O el ancho que use tu diseño
-    alignSelf: 'center',
-    borderColor: '#16235f',
-    borderWidth: 2,
-    borderStyle: 'solid',
+    width: "50%",
+    minWidth: 700,
+
+    alignSelf: "center",
+
+    backgroundColor: "#ffffff",
+
+    marginVertical: 8,
+
+    borderRadius: 10,
+
+    borderWidth: 1,
+    borderColor: "#dddddd",
+
+    overflow: "hidden",
   },
-  centerContainer: {
-    flex: 1,                    // Toma todo el espacio disponible entre los dos escudos
-    flexDirection: 'column',    // Organiza nombre1, vs, nombre2 hacia abajo
-    justifyContent: 'center',
-    paddingHorizontal: 12,      // Despega los textos de los escudos
+
+  infoRow: {
+    backgroundColor: "#f3f3f3",
+
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+
+    borderBottomWidth: 1,
+    borderBottomColor: "#e5e5e5",
   },
+
+  infoText: {
+    fontSize: 13,
+    color: "#666",
+  },
+
+  matchRow: {
+    flexDirection: "row",
+
+    alignItems: "center",
+
+    paddingHorizontal: 18,
+    paddingVertical: 18,
+  },
+
+  teamContainer: {
+    flex: 1,
+
+    flexDirection: "row",
+
+    alignItems: "center",
+
+    gap: 12,
+  },
+
+  teamRight: {
+    justifyContent: "flex-end",
+  },
+
   teamName: {
-    color: '#ffffff',
-    fontSize: 25,
-    fontWeight: 'bold',
-    fontStyle: 'italic',
-    fontWeight: '600',
-    
+    fontSize: 20,
+
+    color: "#222",
+
+    fontWeight: "600",
   },
-  vsText: {
-    color: '#ffffff',
-    fontSize: 30,
-    fontWeight: 'bold',
-    fontStyle: 'italic',
-    textAlign: 'center',        // El "vs" siempre se queda en el centro justo
-    marginVertical: 2,
+
+  scoreContainer: {
+    width: 140,
+
+    flexDirection: "row",
+
+    justifyContent: "space-evenly",
+
+    alignItems: "center",
   },
-  // Las llaves del truco visual:
-  leftAlign: {
-    textAlign: 'left',          // Pega el nombre 1 al escudo izquierdo
+
+  separator: {
+    fontSize: 24,
+
+    fontWeight: "bold",
+
+    color: "#666",
   },
-  rightAlign: {
-    textAlign: 'right',         // Pega el nombre 2 al escudo derecho
-  },
+
 });
