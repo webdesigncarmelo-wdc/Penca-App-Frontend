@@ -9,7 +9,6 @@ export default function HomeScreen() {
       <ImageBackground
         source={require("../assets/images/bg.jpg")}
         style={styles.background}
-        resizeMode="cover"
       >
 
         <View style={styles.screen}>
@@ -42,6 +41,8 @@ const styles = StyleSheet.create({
 
   background:{
     flex:1,
+
+    width: "100%",
   },
 
 
@@ -64,12 +65,15 @@ const styles = StyleSheet.create({
     right:0,
     bottom:0,
 
-    backgroundColor:"rgba(255,255,255,0.5)",
+    backgroundColor:"rgba(255,255,255,0.00)",
   },
 
 
   content:{
     flex:1,
+    width: "50%",
+    minWidth:700,
+    alignSelf: "center",
   },
 
 });

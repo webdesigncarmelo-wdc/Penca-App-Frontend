@@ -13,19 +13,23 @@ export default function HomeTabs() {
       screenOptions={{
         sceneStyle: styles.scene,
         tabBarStyle: styles.tabBar,
+        tabBarLabelStyle: styles.label,
       }}
     >
       <Tab.Screen
+        style={styles.name}
         name="Partidos"
         component={MatchesScreen}
       />
 
       <Tab.Screen
-        name="Posiciones"
+        style={styles.name}
+        name="Torneo"
         component={StandingsScreen}
       />
 
       <Tab.Screen
+        style={styles.name}
         name="Penca"
         component={PencaScreen}
       />
@@ -34,19 +38,20 @@ export default function HomeTabs() {
 }
 
 const styles = StyleSheet.create({
-
   scene: {
-    backgroundColor: "rgba(255,255,255,0.00)",
+    backgroundColor: "#fff",
   },
 
   tabBar: {
-    backgroundColor: "rgba(255,255,255,0.00)",
-
+    backgroundColor: "#fff",
     elevation: 0,
-
     shadowOpacity: 0,
-
     borderBottomWidth: 0,
   },
 
+  label: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#222",
+  },
 });

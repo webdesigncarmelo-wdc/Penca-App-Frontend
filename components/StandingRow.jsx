@@ -6,18 +6,18 @@ export default function StandingRow({ team }) {
   return (
     <View style={styles.row}>
 
-      {/* Posición */}
+      {/* Posición 
       <View style={styles.positionColumn}>
         <Text style={styles.position}>
           {team.position}
         </Text>
       </View>
-
+      */}
 
       {/* Escudo */}
       <View style={styles.shieldColumn}>
         <ShieldBadge
-          image={teamImages[team.image]}
+          image={teamImages[team.team.image]}
           size={38}
         />
       </View>
@@ -29,7 +29,7 @@ export default function StandingRow({ team }) {
           style={styles.teamName}
           numberOfLines={1}
         >
-          {team.name}
+          {team.team.name}
         </Text>
       </View>
 
