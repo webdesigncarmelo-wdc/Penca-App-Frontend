@@ -2,17 +2,17 @@ import { View, Text, StyleSheet } from "react-native";
 import ShieldBadge from "./ShieldBadge.jsx";
 import { teamImages } from "../assets/clubs/teamImages";
 
-export default function StandingRow({ team }) {
+export default function StandingRow({ team, position }) {
   return (
     <View style={styles.row}>
 
-      {/* Posición 
+      {/* Posición */}
       <View style={styles.positionColumn}>
         <Text style={styles.position}>
-          {team.position}
+          {position}
         </Text>
       </View>
-      */}
+      
 
       {/* Escudo */}
       <View style={styles.shieldColumn}>

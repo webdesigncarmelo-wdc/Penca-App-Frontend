@@ -28,8 +28,8 @@ export default function StandingsScreen(){
         <FlatList
           data={standings}
           keyExtractor={(item)=>item.team._id}
-          renderItem={({item})=>(
-            <StandingRow team={item}/>
+          renderItem={({item, index})=>(
+            <StandingRow team={ item } position={ index+1 }/>
           )}
         />
     </View>
