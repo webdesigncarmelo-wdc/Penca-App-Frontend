@@ -3,14 +3,14 @@ import ShieldBadge from "./ShieldBadge";
 import MatchScore from "./MatchScore";
 import { teamImages } from "../assets/clubs/teamImages";
 
-export default function MatchCard({ homeTeam, awayTeam, homeGoals, awayGoals }) {
+export default function MatchCard({ homeTeam, awayTeam, homeGoals, awayGoals, matchday }) {
    return (
     <View style={styles.cardContainer}>
 
       {/* Info contextual */}
       <View style={styles.infoRow}>
         <Text style={styles.infoText}>
-          Fecha 7 • Domingo 9/8 • 15:30 • Parque Artigas
+          Fecha {matchday.number} • Domingo 9/8 • 15:30 • Parque Artigas
         </Text>
       </View>
 

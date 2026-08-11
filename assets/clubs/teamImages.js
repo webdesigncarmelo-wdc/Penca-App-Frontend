@@ -10,4 +10,5 @@ export const teamImages = {
     sud: require("./sud.jpg"),
     uru: require("./uru.jpg"),
     wan: require("./wan.jpg"),
+    car: require("./car.jpg"),
 };

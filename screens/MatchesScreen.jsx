@@ -20,13 +20,18 @@ export default function MatchesScreen() {
     loadMatches();
   }, []);
 
+  const sortedMatches = [...matches].sort(
+    (a, b) => b.matchday.number - a.matchday.number
+  );
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={matches}
+        data={sortedMatches}
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
           <MatchCard
+            matchday={item.matchday}
             homeTeam={item.homeTeam}
             awayTeam={item.awayTeam}
             homeGoals={item.homeGoals}

@@ -57,6 +57,13 @@ export default function StandingRow({ team, position }) {
         </Text>
       </View>
 
+       {/* Goal diff */}
+      <View style={styles.statColumn}>
+        <Text style={styles.stat}>
+          {team.goalDifference}
+        </Text>
+      </View>
+
 
       {/* Puntos */}
       <View style={styles.pointsColumn}>
@@ -79,9 +86,7 @@ const styles = StyleSheet.create({
 
     width:"50%",
     minWidth:700,
-
     alignSelf:"center",
-
     backgroundColor:"#ffffff",
 
     paddingHorizontal:18,
@@ -95,69 +100,57 @@ const styles = StyleSheet.create({
 
   positionColumn:{
     width:40,
-
     alignItems:"center",
   },
 
 
   position:{
     fontSize:16,
-
     fontWeight:"600",
-
     color:"#555",
   },
 
 
   shieldColumn:{
     width:55,
-
     alignItems:"center",
   },
 
 
   nameColumn:{
     flex:1,
-
     paddingLeft:10,
   },
 
 
   teamName:{
     fontSize:18,
-
     fontWeight:"600",
-
     color:"#222",
   },
 
 
   statColumn:{
     width:45,
-
     alignItems:"center",
   },
 
 
   stat:{
     fontSize:16,
-
     color:"#555",
   },
 
 
   pointsColumn:{
     width:55,
-
     alignItems:"center",
   },
 
 
   points:{
     fontSize:18,
-
     fontWeight:"bold",
-
     color:"#222",
   },
 
