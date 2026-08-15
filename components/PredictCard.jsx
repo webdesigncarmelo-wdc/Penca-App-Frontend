@@ -1,9 +1,17 @@
 import { View, Text, StyleSheet } from "react-native";
+import { useState } from "react";
 import ShieldBadge from "./ShieldBadge";
 import MatchScore from "./MatchScore";
 import { teamImages } from "../assets/clubs/teamImages";
+import AppButton from "./ButtonCard"
+import GoalPicker from "./GoalPicker";
 
-export default function MatchCard({ homeTeam, awayTeam, homeGoals, awayGoals, matchday }) {
+export default function PredictCard({ homeTeam, awayTeam, homeGoals, awayGoals, matchday }) {
+
+  const [homePrediction, setHomePrediction] = useState(0);
+  const [awayPrediction, setAwayPrediction] = useState(0);
+  const [saved, setSaved] = useState(false);
+
    return (
     <View style={styles.cardContainer}>
 
@@ -13,19 +21,19 @@ export default function MatchCard({ homeTeam, awayTeam, homeGoals, awayGoals, ma
           Fecha {matchday.number}
         </Text>
         <Text style={styles.infoText}>
-            •
+           •
         </Text>
         <Text style={styles.infoText}>
           Domingo 9/8
         </Text>
         <Text style={styles.infoText}>
-            •
+           •
         </Text>
         <Text style={styles.infoText}>
           16 : 00
         </Text>
         <Text style={styles.infoText}>
-            •
+           •
         </Text>
         <Text style={styles.infoText}>
           Parque Artigas
@@ -76,6 +84,25 @@ export default function MatchCard({ homeTeam, awayTeam, homeGoals, awayGoals, ma
 
       </View>
 
+      <View style={styles.predictRow}>
+        <GoalPicker
+          value={homePrediction}
+          onChange={setHomePrediction}
+        />
+
+        <AppButton
+          width="30%"
+          onPress={() => {
+            setSaved(true);
+          }} > {saved ? "Guardado ✓" : "Guardar"}
+        </AppButton>
+
+        <GoalPicker
+          value={awayPrediction}
+          onChange={setAwayPrediction}
+        />
+        </View>
+
     </View>
   );
 }
@@ -123,10 +150,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
 
     paddingHorizontal: 18,
-    paddingVertical: 18,
+    paddingTop: 18,
   },
 
-  teamContainer: {
+
+teamContainer: {
     flex: 1,
 
     flexDirection: "row",
@@ -165,5 +193,21 @@ const styles = StyleSheet.create({
 
     color: "#666",
   },
+
+  predictRow: {
+    width: "70%",
+
+    alignSelf: "center",
+
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  success: {
+    color: "white",
+    fontSize: 24,
+    fontWeight: "700",
+  }
 
 });

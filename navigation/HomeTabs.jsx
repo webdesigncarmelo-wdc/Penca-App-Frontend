@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 
 import MatchesScreen from "../screens/MatchesScreen";
 import StandingsScreen from "../screens/StandingsScreen";
+import PredictsScreen from "../screens/PredictsScreen";
 import PencaScreen from "../screens/PencaScreen";
 
 const Tab = createMaterialTopTabNavigator();
@@ -26,6 +27,12 @@ export default function HomeTabs() {
         style={styles.name}
         name="Torneo"
         component={StandingsScreen}
+      />
+
+      <Tab.Screen
+        style={styles.name}
+        name="Predicciones"
+        component={PredictsScreen}
       />
 
       <Tab.Screen

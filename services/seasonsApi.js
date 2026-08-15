@@ -11,7 +11,6 @@ export async function getSeasons() {
 }
 
 export async function getSeasonsByCompetition(id) {
-  console.log(id)
   const response = await fetch(`${API_URL}/seasons/competition/${id}`);
 
   if (!response.ok) {

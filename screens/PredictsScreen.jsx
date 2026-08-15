@@ -1,16 +1,16 @@
 import { FlatList, View, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
 import { getMatches } from "../services/matchesApi";
-import MatchCard from "../components/MatchCard";
+import PredictCard from "../components/PredictCard";
 
-export default function MatchesScreen() {
+export default function PredictsScreen() {
 
   const [matches, setMatches] = useState([]);
 
   useEffect(() => {
     async function loadMatches() {
       try {
-        const data = await getMatches({ status: "played" });
+        const data = await getMatches({ status: "pending" });
         setMatches(data);
       } catch (error) {
         console.error(error);
@@ -30,7 +30,7 @@ export default function MatchesScreen() {
         data={sortedMatches}
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
-          <MatchCard
+          <PredictCard
             matchday={item.matchday}
             homeTeam={item.homeTeam}
             awayTeam={item.awayTeam}

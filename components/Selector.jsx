@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { getCompetitions } from "../services/competitionsApi.js";
 import { getSeasonsByCompetition } from "../services/seasonsApi.js";
 import { getChampionshipsBySeason } from "../services/championshipsApi.js"
+import AppButton from "./ButtonCard.jsx";
 
 export default function Selector() {
 
@@ -305,20 +306,14 @@ export default function Selector() {
 
             {/* BOTÓN */}
 
-            <Pressable
-              style={styles.button}
+            <AppButton
+              width={"50%"}
               onPress={() => {
                 setOpenDropdown(null);
                 setVisible(false);
               }}
-            >
-
-              <Text style={styles.buttonText}>
-                Aplicar
-              </Text>
-
-            </Pressable>
-
+            > Aplicar 
+            </AppButton>
 
           </View>
 
