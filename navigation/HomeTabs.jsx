@@ -33,6 +33,7 @@ export default function HomeTabs() {
         name="Penca"
         component={PencaScreen}
       />
+
     </Tab.Navigator>
   );
 }

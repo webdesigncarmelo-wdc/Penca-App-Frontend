@@ -19,10 +19,10 @@ export default function StandingsScreen(){
       }
 
       loadStandings();
-    }, []);
+    }, 
+  []);
 
   return(
-    
     <View style={{ flex: 1 }}>
       <StandingHeader/>
         <FlatList

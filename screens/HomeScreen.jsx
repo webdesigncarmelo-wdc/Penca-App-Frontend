@@ -1,6 +1,8 @@
-import { View, ImageBackground, StyleSheet } from "react-native";
+import { View, ImageBackground, StyleSheet, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HomeTabs from "../navigation/HomeTabs";
+import Selector from "../components/Selector";
+import LoginCard from "../components/LoginCard";
 
 export default function HomeScreen() {
   return (
@@ -8,18 +10,25 @@ export default function HomeScreen() {
 
       <ImageBackground
         source={require("../assets/images/bg.jpg")}
-        style={styles.background}
-      >
+        style={styles.background}>
 
         <View style={styles.screen}>
 
           {/* Fondo translúcido */}
           <View style={styles.overlay} />
 
-
           {/* Contenido */}
           <View style={styles.content}>
+            <View style={styles.header}>
+
+              <Selector />
+
+              <LoginCard />
+
+            </View>
+
             <HomeTabs />
+            
           </View>
 
 
@@ -65,7 +74,7 @@ const styles = StyleSheet.create({
     right:0,
     bottom:0,
 
-    backgroundColor:"rgba(255,255,255,0.00)",
+    backgroundColor:"rgba(255,255,255,1.00)",
   },
 
 
@@ -74,6 +83,19 @@ const styles = StyleSheet.create({
     width: "50%",
     minWidth:700,
     alignSelf: "center",
+  },
+
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  auth: {
+      flexDirection: "row",
+      justifyContent: "flex-end",
+      alignItems: "center",
+      gap: 15,
   },
 
 });

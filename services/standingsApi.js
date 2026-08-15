@@ -9,6 +9,5 @@ export async function getStandings() {
     if (!response.ok) {
         throw new Error("Error al obtener la tabla");
     }
-    console.log(response)
     return await response.json();
 }
