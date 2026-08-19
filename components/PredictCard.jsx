@@ -1,16 +1,29 @@
 import { View, Text, StyleSheet } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ShieldBadge from "./ShieldBadge";
 import MatchScore from "./MatchScore";
 import { teamImages } from "../assets/clubs/teamImages";
-import AppButton from "./ButtonCard"
+import ButtonCard from "./ButtonCard"
 import GoalPicker from "./GoalPicker";
+import { savePredict } from "../services/predictsApi";
 
-export default function PredictCard({ homeTeam, awayTeam, homeGoals, awayGoals, matchday }) {
+export default function PredictCard({ homeTeam, awayTeam, homeGoals, awayGoals, matchday, matchId, userId, predict }) {
 
   const [homePrediction, setHomePrediction] = useState(0);
   const [awayPrediction, setAwayPrediction] = useState(0);
   const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    if (predict) {
+        setHomePrediction(predict.homeGoals);
+        setAwayPrediction(predict.awayGoals);
+        setSaved(true);
+    } else {
+        setHomePrediction(0);
+        setAwayPrediction(0);
+        setSaved(false);
+    }
+  }, [predict]);
 
    return (
     <View style={styles.cardContainer}>
@@ -90,12 +103,17 @@ export default function PredictCard({ homeTeam, awayTeam, homeGoals, awayGoals, 
           onChange={setHomePrediction}
         />
 
-        <AppButton
+        <ButtonCard
           width="30%"
           onPress={() => {
             setSaved(true);
+            savePredict(
+              matchId, userId,
+              homePrediction,
+              awayPrediction
+            )
           }} > {saved ? "Guardado ✓" : "Guardar"}
-        </AppButton>
+        </ButtonCard>
 
         <GoalPicker
           value={awayPrediction}
