@@ -2,15 +2,22 @@ import { FlatList, View, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
 import { getMatches } from "../services/matchesApi";
 import MatchCard from "../components/MatchCard";
+import { useChampionship } from "../context/ChampionshipContext";
 
 export default function MatchesScreen() {
 
   const [matches, setMatches] = useState([]);
 
+  // Variables del Context
+    const {
+      championship,
+      setChampionship
+    } = useChampionship();
+
   useEffect(() => {
     async function loadMatches() {
       try {
-        const data = await getMatches({ status: "played" });
+        const data = await getMatches( championship?._id, {  status: "played" });
         setMatches(data);
       } catch (error) {
         console.error(error);
@@ -18,7 +25,7 @@ export default function MatchesScreen() {
     }
 
     loadMatches();
-  }, []);
+  }, [championship]);
 
   const sortedMatches = [...matches].sort(
     (a, b) => b.matchday.number - a.matchday.number

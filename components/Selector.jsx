@@ -2,89 +2,101 @@ import { View, Text, Pressable, Modal, ScrollView, StyleSheet } from "react-nati
 import React, { useState, useEffect } from "react";
 import { getCompetitions } from "../services/competitionsApi.js";
 import { getSeasonsByCompetition } from "../services/seasonsApi.js";
-import { getChampionshipsBySeason } from "../services/championshipsApi.js"
+import { getChampionshipsBySeason } from "../services/championshipsApi.js";
 import AppButton from "./ButtonCard.jsx";
+import { useChampionship } from "../context/ChampionshipContext";
 
 export default function Selector() {
 
   const [visible, setVisible] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
 
+  // Selección temporal del Selector
+  const [selectedCompetition, setSelectedCompetition] = useState(null);
+  const [selectedSeason, setSelectedSeason] = useState(null);
+  const [selectedChampionship, setSelectedChampionship] = useState(null);
 
-  // datos seleccionados: inciiales o elegidos
-  const [competition, setCompetition] = useState(null);
-
-  const [season, setSeason] = useState(null);
-
-  const [championship, setChampionship] = useState(null);
-
-  // datos del getCompetitions
+  // Datos del getCompetitions
   const [competitions, setCompetitions] = useState([]);
-  
+
+  // Variables del Context
+  const {
+    competition,
+    season,
+    championship,
+    setCompetition,
+    setSeason,
+    setChampionship
+  } = useChampionship();
+
+
+  // Cargar competiciones
   useEffect(() => {
-      async function loadCompetitions() {
-        try {
-          const data = await getCompetitions();
-          setCompetitions(data);
-          setCompetition(data[0]);
-        } catch (error) {
-          console.error(error);
-        }
+
+    async function loadCompetitions() {
+      try {
+        const data = await getCompetitions();
+        setCompetitions(data);
+        setSelectedCompetition(data[0]);
+        setCompetition(data[0]);
+      } catch (error) {
+        console.error(error);
       }
-      loadCompetitions();
-      
-    }, 
-  []);
-  
-  // datos del getSeasonsByCompetitions
+    }
+    loadCompetitions();
+  }, []);
+
+
+  // Datos del getSeasonsByCompetition
   const [seasons, setSeasons] = useState([]);
 
   useEffect(() => {
-    if (!competition) return;
-
+    if (!selectedCompetition) return;
     async function loadSeasons() {
       try {
-        const data = await getSeasonsByCompetition(competition._id);
-
+        const data = await getSeasonsByCompetition(
+          selectedCompetition._id
+        );
         setSeasons(data);
+        setSelectedSeason(data[0]);
         setSeason(data[0]);
       } catch (error) {
         console.error(error);
       }
     }
     loadSeasons();
-    }, [competition]);
+  }, [selectedCompetition]);
 
-  // datos del getChampionshipBySeason
+
+  // Datos del getChampionshipsBySeason
   const [championships, setChampionships] = useState([]);
 
   useEffect(() => {
-    if (!season) return;
-
+    if (!selectedSeason) return;
     async function loadChampionships() {
       try {
-        const data = await getChampionshipsBySeason(season._id);
-
+        const data = await getChampionshipsBySeason(
+          selectedSeason._id
+        );
         setChampionships(data);
-        setChampionship(data[0]);
+        setSelectedChampionship(data[1]);
+        setChampionship(data[1]);
       } catch (error) {
         console.error(error);
       }
     }
     loadChampionships();
-    }, [season]);
+  }, [selectedSeason]);
+
 
   const toggleDropdown = (name) => {
-
     if (openDropdown === name) {
       setOpenDropdown(null);
     } else {
       setOpenDropdown(name);
     }
-
   };
 
-  
 
   return (
     <View style={styles.container}>
@@ -95,25 +107,18 @@ export default function Selector() {
         style={styles.selector}
         onPress={() => setVisible(true)}
       >
-
         <View>
-
           <Text style={styles.title}>
-             {competition?.name}
+            {selectedCompetition?.name}
           </Text>
-
           <Text style={styles.subtitle}>
-            {season?.name} • {championship?.name}
+            {selectedSeason?.name} • {selectedChampionship?.name}
           </Text>
-
         </View>
-
         <Text style={styles.arrow}>
           ▼
         </Text>
-
       </Pressable>
-
 
       {/* PANEL */}
 
@@ -123,123 +128,91 @@ export default function Selector() {
         animationType="fade"
         onRequestClose={() => setVisible(false)}
       >
-
         <View style={styles.modalOverlay}>
-
           <View style={styles.panel}>
-
 
             {/* COMPETITION */}
 
             <Text style={styles.label}>
               Competición
             </Text>
-
             <Pressable
               style={styles.dropdownHeader}
               onPress={() => toggleDropdown("competition")}
             >
-
               <Text>
-                {competition?.name}
+                {selectedCompetition?.name}
               </Text>
-
               <Text>
                 {openDropdown === "competition" ? "▲" : "▼"}
               </Text>
-
             </Pressable>
 
-
             {openDropdown === "competition" && (
-
               <ScrollView
                 style={styles.dropdown}
                 showsVerticalScrollIndicator={false}
               >
-
                 {competitions.map((item) => (
-
                   <Pressable
                     key={item._id}
                     style={styles.option}
                     onPress={() => {
-                      setCompetition(item);
+                      setSelectedCompetition(item);
                       setOpenDropdown(null);
                     }}
                   >
-
                     <Text>
                       {item.name}
                     </Text>
-
-                    {competition?._id === item._id && (
+                    {selectedCompetition?._id === item._id && (
                       <Text>✓</Text>
                     )}
-
                   </Pressable>
-
                 ))}
-
               </ScrollView>
-
             )}
-
 
             {/* SEASON */}
 
             <Text style={styles.label}>
               Temporada
             </Text>
-
             <Pressable
               style={styles.dropdownHeader}
               onPress={() => toggleDropdown("season")}
             >
-
               <Text>
-                {season?.name}
+                {selectedSeason?.name}
               </Text>
-
               <Text>
                 {openDropdown === "season" ? "▲" : "▼"}
               </Text>
-
             </Pressable>
 
-
             {openDropdown === "season" && (
-
               <ScrollView
                 style={styles.dropdown}
                 showsVerticalScrollIndicator={false}
               >
-
                 {seasons.map((item) => (
-
                   <Pressable
                     key={item._id}
                     style={styles.option}
                     onPress={() => {
-                      setSeason(item);
+                      setSelectedSeason(item);
                       setOpenDropdown(null);
                     }}
                   >
-
                     <Text>
                       {item.name}
                     </Text>
-
-                    {season?._id === item && (
+                    {selectedSeason?._id === item._id && (
                       <Text>✓</Text>
                     )}
-
                   </Pressable>
-
                 ))}
-
               </ScrollView>
-
             )}
 
 
@@ -248,57 +221,44 @@ export default function Selector() {
             <Text style={styles.label}>
               Campeonato
             </Text>
-
             <Pressable
               style={styles.dropdownHeader}
               onPress={() =>
                 toggleDropdown("championship")
               }
             >
-
               <Text>
-                {championship?.name}
+                {selectedChampionship?.name}
               </Text>
-
               <Text>
                 {openDropdown === "championship"
                   ? "▲"
                   : "▼"}
               </Text>
-
             </Pressable>
 
-
             {openDropdown === "championship" && (
-
               <ScrollView
                 style={styles.dropdown}
                 showsVerticalScrollIndicator={false}
               >
-
                 {championships.map((item) => (
-
                   <Pressable
                     key={item._id}
                     style={styles.option}
                     onPress={() => {
-                      setChampionship(item);
+                      setSelectedChampionship(item);
                       setOpenDropdown(null);
                     }}
                   >
-
                     <Text>
                       {item.name}
                     </Text>
-
-                    {championship?._id === item && (
+                    {selectedChampionship?._id === item._id && (
                       <Text>✓</Text>
                     )}
-
                   </Pressable>
-
                 ))}
-
               </ScrollView>
 
             )}
@@ -311,16 +271,17 @@ export default function Selector() {
               onPress={() => {
                 setOpenDropdown(null);
                 setVisible(false);
+                // Confirmar selección en el Context
+                setCompetition(selectedCompetition);
+                setSeason(selectedSeason);
+                setChampionship(selectedChampionship);
               }}
-            > Aplicar 
+            >
+              Aplicar
             </AppButton>
-
           </View>
-
         </View>
-
       </Modal>
-
     </View>
   );
 }
