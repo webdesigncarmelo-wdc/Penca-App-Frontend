@@ -3,15 +3,22 @@ import { useEffect, useState } from "react";
 import { getStandings } from "../services/standingsApi";
 import StandingRow from "../components/StandingRow";
 import StandingHeader from "../components/StandingHeader";
+import { useChampionship } from "../context/ChampionshipContext";
 
 export default function StandingsScreen(){
+
+  // Variables del Context
+    const {
+      championship,
+      setChampionship
+    } = useChampionship();
 
   const [standings, setStandings] = useState([]);
 
     useEffect(() => {
       async function loadStandings() {
         try {
-          const data = await getStandings();
+          const data = await getStandings( championship?._id );
           setStandings(data);
         } catch (error) {
           console.error(error);
@@ -20,7 +27,7 @@ export default function StandingsScreen(){
 
       loadStandings();
     }, 
-  []);
+  [championship]);
 
   return(
     <View style={{ flex: 1 }}>

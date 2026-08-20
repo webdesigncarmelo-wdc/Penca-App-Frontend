@@ -37,8 +37,8 @@ export default function Selector() {
       try {
         const data = await getCompetitions();
         setCompetitions(data);
-        setSelectedCompetition(data[0]);
-        setCompetition(data[0]);
+        setSelectedCompetition(data[2]);
+        setCompetition(data[2]);
       } catch (error) {
         console.error(error);
       }
@@ -79,8 +79,8 @@ export default function Selector() {
           selectedSeason._id
         );
         setChampionships(data);
-        setSelectedChampionship(data[1]);
-        setChampionship(data[1]);
+        setSelectedChampionship(data[0]);
+        setChampionship(data[0]);
       } catch (error) {
         console.error(error);
       }
