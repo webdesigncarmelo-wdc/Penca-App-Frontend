@@ -15,6 +15,7 @@ export default function MatchesScreen() {
     } = useChampionship();
 
   useEffect(() => {
+    if (!championship) return;
     async function loadMatches() {
       try {
         const data = await getMatches( championship?._id, {  status: "played" });
@@ -23,7 +24,6 @@ export default function MatchesScreen() {
         console.error(error);
       }
     }
-
     loadMatches();
   }, [championship]);
 

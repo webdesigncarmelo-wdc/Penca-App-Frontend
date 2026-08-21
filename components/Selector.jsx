@@ -37,8 +37,8 @@ export default function Selector() {
       try {
         const data = await getCompetitions();
         setCompetitions(data);
-        setSelectedCompetition(data[2]);
-        setCompetition(data[2]);
+        setSelectedCompetition(data[1]);
+        setCompetition(data[1]);
       } catch (error) {
         console.error(error);
       }

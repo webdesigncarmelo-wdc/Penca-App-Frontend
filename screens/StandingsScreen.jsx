@@ -2,19 +2,20 @@ import { FlatList, View, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
 import { getStandings } from "../services/standingsApi";
 import StandingRow from "../components/StandingRow";
-import StandingHeader from "../components/StandingHeader";
 import { useChampionship } from "../context/ChampionshipContext";
 
 export default function StandingsScreen(){
 
   // Variables del Context
     const {
+      competition,
+      setCompetition,
       championship,
       setChampionship
     } = useChampionship();
 
   const [standings, setStandings] = useState([]);
-
+    if (!standings) return;
     useEffect(() => {
       async function loadStandings() {
         try {
@@ -31,7 +32,6 @@ export default function StandingsScreen(){
 
   return(
     <View style={{ flex: 1 }}>
-      <StandingHeader/>
         <FlatList
           data={standings}
           keyExtractor={(item)=>item.team._id}
