@@ -15,8 +15,8 @@ export default function StandingsScreen(){
     } = useChampionship();
 
   const [standings, setStandings] = useState([]);
-    if (!standings) return;
-    useEffect(() => {
+  useEffect(() => {
+      if (!championship) return;
       async function loadStandings() {
         try {
           const data = await getStandings( championship?._id );

@@ -8,7 +8,6 @@ const orderedUsers = [...pencaData].sort(
 );
 
 export default function PencaScreen(){
-
   return(
 
     <View style={styles.container}>

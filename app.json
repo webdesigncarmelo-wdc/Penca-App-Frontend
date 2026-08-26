@@ -3,6 +3,7 @@
     "name": "mi-app",
     "slug": "mi-app",
     "version": "1.0.0",
+    "scheme": "penca-wdc",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -22,7 +23,8 @@
     },
     "plugins": [
       "expo-font",
-      "expo-status-bar"
+      "expo-status-bar",
+      "react-native-auth0"
     ]
   }
 }
