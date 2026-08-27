@@ -1,8 +1,8 @@
-const API_URL = "http://192.168.1.116:5100";
+import api from "./api";
 
 export async function getStandings(championshipId) {
 
-    const response = await fetch(`${API_URL}/standings?championship=${championshipId}`);
+    const response = await api( "GET", `/standings?championship=${championshipId}` );
 
     if (!response.ok) {
         throw new Error("Error al obtener la tabla");

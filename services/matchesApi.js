@@ -1,10 +1,9 @@
-const API_URL = "http://192.168.1.116:5100";
+import api from "./api";
 
 export async function getMatches(championshipId, filter = {}) {
     const params = new URLSearchParams(filter);
 
-    // const response = await fetch(`${API_URL}/matches`);
-    const response = await fetch(`${API_URL}/championships/${championshipId}/matches?${params}`);
+    const response = await api("GET", `/championships/${championshipId}/matches?${params}`);
 
     if (!response.ok) {
         throw new Error("Error al obtener los partidos");
@@ -13,7 +12,7 @@ export async function getMatches(championshipId, filter = {}) {
 }
 
 export async function getMatch(id) {
-    const response = await fetch(`${API_URL}/matches/${id}`);
+    const response = await api("GET", `/matches/${id}`);
 
     if (!response.ok) {
         throw new Error("Error al obtener los partidos");

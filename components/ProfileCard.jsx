@@ -1,23 +1,23 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 
-export default function LoginCard({ authorize }) {
+export default function ProfileCard({ logout }) {
 
-    const handleLogin = async () => {
+    const handleLogout = async () => {
         try {
-            await authorize();
+            await logout();
         } catch (error) {
-            console.log("Error al iniciar sesión:", error);
+            console.log("Error al cerrar sesión:", error);
         }
     };
 
     return (
         <View style={styles.auth}>
-            <Pressable onPress={handleLogin}>
-                <Text style={styles.title}>Iniciar sesión</Text>
+            <Pressable>
+                <Text style={styles.title}>Perfil</Text>
             </Pressable>
 
-            <Pressable>
-                <Text style={styles.title}>Registrarse</Text>
+            <Pressable onPress={handleLogout}>
+                <Text style={styles.title}>Cerrar sesión</Text>
             </Pressable>
         </View>
     );

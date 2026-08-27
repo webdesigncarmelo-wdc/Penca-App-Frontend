@@ -1,7 +1,7 @@
-const API_URL = "http://192.168.1.116:5100";
+import api from "./api";
 
 export async function getSeasons() {
-  const response = await fetch(`${API_URL}/seasons`);
+  const response = await api( "GET", `/seasons` );
 
   if (!response.ok) {
     throw new Error("Error al obtener las distintas temporadas");
@@ -11,7 +11,7 @@ export async function getSeasons() {
 }
 
 export async function getSeasonsByCompetition(id) {
-  const response = await fetch(`${API_URL}/seasons/competition/${id}`);
+  const response = await api( "GET", `/seasons/competition/${id}`);
 
   if (!response.ok) {
     throw new Error("Error al obtener las distintas temporadas");
@@ -21,7 +21,7 @@ export async function getSeasonsByCompetition(id) {
 }
 
 export async function getSeason(id) {
-  const response = await fetch(`${API_URL}/seasons/${id}`);
+  const response = await fetch( "GET", `/seasons/${id}`);
 
   if (!response.ok) {
     throw new Error("Error al obtener la temporada");

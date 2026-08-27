@@ -1,7 +1,7 @@
-const API_URL = "http://192.168.1.116:5100";
+import api from "./api";
 
 export async function getCompetitions() {
-  const response = await fetch(`${API_URL}/competitions`);
+  const response = await api("GET", `/competitions`);
 
   if (!response.ok) {
     throw new Error("Error al obtener las distintas competiciones");
@@ -11,7 +11,7 @@ export async function getCompetitions() {
 
 
 export async function getCompetition(id) {
-  const response = await fetch(`${API_URL}/competitions/${id}`);
+  const response = await api("GET", `/competitions/${id}`);
 
   if (!response.ok) {
     throw new Error("Error al obtener la competición");

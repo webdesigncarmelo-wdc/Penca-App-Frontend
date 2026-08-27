@@ -1,7 +1,8 @@
-const API_URL = "http://192.168.1.116:5100";
+import api from "./api";
 
 export async function getTeams() {
-  const response = await fetch(`${API_URL}/teams`);
+
+  const response = await api( "GET", "/teams");
 
   if (!response.ok) {
     throw new Error("Error al obtener los equipos");
@@ -11,7 +12,7 @@ export async function getTeams() {
 }
 
 export async function getTeam(id) {
-  const response = await fetch(`${API_URL}/teams/${id}`);
+  const response = await api( "GET", `/teams/${id}` );
 
   if (!response.ok) {
     throw new Error("Error al obtener los equipos");

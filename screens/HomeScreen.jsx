@@ -2,7 +2,8 @@ import { View, ImageBackground, StyleSheet, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HomeTabs from "../navigation/HomeTabs";
 import Selector from "../components/Selector";
-import LoginCard from "../components/LoginCard";
+import LoginCard from "../screens/LoginScreen";
+import LoginScreen from "../screens/LoginScreen";
 
 export default function HomeScreen() {
   return (
@@ -23,7 +24,7 @@ export default function HomeScreen() {
 
               <Selector />
 
-              <LoginCard />
+              <LoginScreen />
 
             </View>
 

@@ -1,9 +1,9 @@
-const API_URL = "http://192.168.1.116:5100";
+import api from "./api";
 
 export async function getPredicts(filter = {}) {
     const params = new URLSearchParams(filter);
 
-    const response = await fetch(`${API_URL}/predicts?${params}`);
+    const response = await api( "GET", `/predicts?${params}` );
 
     if (!response.ok) {
         throw new Error("Error al obtener las predicciones");
@@ -12,7 +12,7 @@ export async function getPredicts(filter = {}) {
 }
 
 export async function getPredict(id) {
-    const response = await fetch(`${API_URL}/predicts/${id}`);
+    const response = await api( "GET", `/predicts/${id}` );
 
     if (!response.ok) {
         throw new Error("Error al obtener la predicción");
@@ -22,12 +22,12 @@ export async function getPredict(id) {
 }
 
 export async function savePredict(matchId, userId, homePrediction, awayPrediction) {
-    console.log(matchId, userId, homePrediction, awayPrediction)
-    const response = await fetch(`${API_URL}/predicts/`, {
-        method: "POST",
 
-        headers: { "Content-Type": "application/json" },
 
+
+    const response = await api( "POST", `/predicts/`, {
+        headers: {
+            "Content-Type": "application/json"},
         body: JSON.stringify({
             user: userId,
             match: matchId,

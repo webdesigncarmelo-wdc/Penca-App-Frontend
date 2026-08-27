@@ -1,7 +1,7 @@
-const API_URL = "http://192.168.1.116:5100";
+import api from "./api";
 
 export async function getChampionships() {
-  const response = await fetch(`${API_URL}/championships`);
+  const response = await api("GET", `/championships`);
 
   if (!response.ok) {
     throw new Error("Error al obtener los distintos campeonatos");
@@ -10,7 +10,7 @@ export async function getChampionships() {
 }
 
 export async function getChampionshipsBySeason(id) {
-  const response = await fetch(`${API_URL}/championships/season/${id}`);
+  const response = await api("GET", `/championships/season/${id}`);
 
   if (!response.ok) {
     throw new Error("Error al obtener los distintos campeonatos");
@@ -20,7 +20,7 @@ export async function getChampionshipsBySeason(id) {
 }
 
 export async function getChampionship(id) {
-  const response = await fetch(`${API_URL}/championships/${id}`);
+  const response = await api("GET", `/championships/${id}`);
 
   if (!response.ok) {
     throw new Error("Error al obtener el campeonato");

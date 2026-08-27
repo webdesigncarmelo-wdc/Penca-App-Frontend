@@ -1,22 +1,24 @@
-export async function api(path, getCredentials) {
+const API_URL = "http://192.168.1.116:5100";
 
-    const credentials = await getCredentials();
+import { auth0Service } from "./auth0Service";
 
-    const token = credentials.accessToken;
+export default async function api(method, url, options = {}) {
 
-    const response = await fetch(
-        `http://localhost:5100${path}`,
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
-        }
-    );
+    const token = auth0Service();
+    
+    const headers = {
+        ...options.headers
+    };
 
-    if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+    if (token) {
+        headers.Authorization = `Bearer ${token}`;
     }
 
-    return await response.json();
+    const response = await fetch(`${API_URL}${url}`, {
+        ...options,
+        method,
+        headers
+    });
+
+    return response;
 }
