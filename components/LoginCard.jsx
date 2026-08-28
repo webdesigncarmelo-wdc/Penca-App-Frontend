@@ -4,7 +4,10 @@ export default function LoginCard({ authorize }) {
 
     const handleLogin = async () => {
         try {
-            await authorize();
+            await authorize(
+                {scope: "openid profile email offline_access"},
+                {customScheme: "pencawdc",}
+            );
         } catch (error) {
             console.log("Error al iniciar sesión:", error);
         }
