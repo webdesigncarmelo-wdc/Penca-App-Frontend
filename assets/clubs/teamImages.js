@@ -1,6 +1,7 @@
 export const teamImages = {
 
     // carmelo
+    car: require("./car/car_car.jpg"),
     art: require("./car/art.jpg"),
     cen: require("./car/cen.jpg"),
     cer: require("./car/cer.jpg"),
@@ -12,10 +13,8 @@ export const teamImages = {
     sud: require("./car/sud.jpg"),
     uru: require("./car/uru.jpg"),
     wan: require("./car/wan.jpg"),
-    "6a7e2104ce8df6f0df4c21e1": require("./car/car.jpg"),
-    "6a7cebb946c24943d4b3b76c": require("./car/car.jpg"),
     // auf
-    "6a871400cb8ac577e123181e" : require("./auf/auf_auf.jpg"),
+    auf: require("./auf/auf_auf.jpg"),
     liv_auf: require("./auf/liv_auf.jpg"),
     cer_auf: require("./auf/cer_auf.jpg"),
     dpm_auf: require("./auf/dpm_auf.jpg"),

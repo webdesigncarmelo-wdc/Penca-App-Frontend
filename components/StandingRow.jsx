@@ -79,79 +79,68 @@ export default function StandingRow({ team, position }) {
 
 const styles = StyleSheet.create({
 
-  row:{
-    flexDirection:"row",
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
 
-    alignItems:"center",
+    width: "100%",
+    alignSelf: "center",
 
-    width:"50%",
-    minWidth:700,
-    alignSelf:"center",
-    backgroundColor:"#ffffff",
+    backgroundColor: "#ffffff",
 
-    paddingHorizontal:18,
-    paddingVertical:12,
+    paddingHorizontal: 12,
+    paddingVertical: 7,
 
-    borderBottomWidth:1,
-    borderBottomColor:"#eeeeee",
-
+    borderBottomWidth: 1,
+    borderBottomColor: "#eeeeee",
   },
 
-
-  positionColumn:{
-    width:40,
-    alignItems:"center",
+  positionColumn: {
+    width: 35,
+    alignItems: "center",
   },
 
-
-  position:{
-    fontSize:16,
-    fontWeight:"600",
-    color:"#555",
+  position: {
+    fontSize: 15,
+    fontWeight: "600",
+    color: "#555",
   },
 
-
-  shieldColumn:{
-    width:55,
-    alignItems:"center",
+  shieldColumn: {
+    width: 48,
+    alignItems: "center",
   },
 
-
-  nameColumn:{
-    flex:1,
-    paddingLeft:10,
+  nameColumn: {
+    flex: 1,
+    paddingLeft: 6,
   },
 
-
-  teamName:{
-    fontSize:18,
-    fontWeight:"600",
-    color:"#222",
+  teamName: {
+    fontSize: 17,
+    fontWeight: "600",
+    color: "#222",
   },
 
-
-  statColumn:{
-    width:45,
-    alignItems:"center",
+  statColumn: {
+    width: 40,
+    alignItems: "center",
   },
 
-
-  stat:{
-    fontSize:16,
-    color:"#555",
+  stat: {
+    fontSize: 15,
+    color: "#555",
   },
 
-
-  pointsColumn:{
-    width:55,
-    alignItems:"center",
+  pointsColumn: {
+    width: 50,
+    alignItems: "center",
   },
 
-
-  points:{
-    fontSize:18,
-    fontWeight:"bold",
-    color:"#222",
+  points: {
+    fontSize: 17,
+    fontWeight: "bold",
+    color: "#222",
   },
 
 });

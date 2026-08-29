@@ -19,14 +19,14 @@ export default function HomeTabs() {
     >
       <Tab.Screen
         style={styles.name}
-        name="Partidos"
-        component={MatchesScreen}
+        name="Posiciones"
+        component={StandingsScreen}
       />
 
       <Tab.Screen
         style={styles.name}
-        name="Torneo"
-        component={StandingsScreen}
+        name="Partidos"
+        component={MatchesScreen}
       />
 
       <Tab.Screen

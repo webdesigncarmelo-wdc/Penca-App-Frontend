@@ -1,18 +1,21 @@
 import { useAuth0 } from "react-native-auth0";
 import { useEffect, useState } from "react";
-
 import LoginCard from "../components/LoginCard";
 import ProfileCard from "../components/ProfileCard";
-
 import { setAccessToken } from "../services/auth0Service";
+import { useWindowDimensions } from "react-native";
 
 export default function LoginScreen() {
+
+    // responsive
+    const { width } = useWindowDimensions();
+    const isCompactHeader = width < 850;
 
     const {
         getCredentials,
         user,
         authorize,
-        logout
+        clearSession
     } = useAuth0();
 
     const [credentials, setCredentials] = useState(null);
@@ -26,17 +29,21 @@ export default function LoginScreen() {
         }
     }, [user]);
 
-    console.log("AUTH USER:", user);
-
     if (!user) {
-        return <LoginCard authorize={authorize} />;
+        return (
+            <LoginCard
+                authorize={authorize}
+                compact={isCompactHeader}
+            />
+        );
     }
 
     return (
         <ProfileCard
             user={user}
             credentials={credentials}
-            logout={logout}
+            logout={clearSession}
+            compact={isCompactHeader}
         />
     );
 }

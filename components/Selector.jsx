@@ -1,5 +1,7 @@
 import { View, Text, Pressable, Modal, ScrollView, StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
+import ShieldBadge from "./ShieldBadge";
+import { teamImages } from "../assets/clubs/teamImages";
 import { getCompetitions } from "../services/competitionsApi.js";
 import { getSeasonsByCompetition } from "../services/seasonsApi.js";
 import { getChampionshipsBySeason } from "../services/championshipsApi.js";
@@ -102,19 +104,18 @@ export default function Selector() {
     <View style={styles.container}>
 
       {/* SELECTOR */}
-
       <Pressable
         style={styles.selector}
         onPress={() => setVisible(true)}
       >
-        <View>
-          <Text style={styles.title}>
-            {selectedCompetition?.name}
-          </Text>
-          <Text style={styles.subtitle}>
-            {selectedSeason?.name} • {selectedChampionship?.name}
-          </Text>
-        </View>
+        <ShieldBadge
+          image={teamImages[competition?.image]}
+          size={50} />
+
+        <Text style={styles.title}>
+          {selectedCompetition?.name}
+        </Text>
+
         <Text style={styles.arrow}>
           ▼
         </Text>
@@ -295,36 +296,28 @@ const styles = StyleSheet.create({
   },
 
   selector: {
-    width: 200,
-    maxWidth: "50%",
+    minWidth: 150,
+    flexShrink: 1,
 
-    paddingVertical: 10,
     paddingHorizontal: 10,
-
-    borderRadius: 50,
-
-    backgroundColor: "#FFF",
+    paddingVertical: 10,
 
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
   },
 
   title: {
+    flex: 1,
+    marginHorizontal: 8,
+
     fontSize: 18,
     fontWeight: "700",
-  },
-
-  subtitle: {
-    marginTop: 4,
-
-    fontSize: 14,
-
-    color: "#414141",
+    textAlign: "center",
   },
 
   arrow: {
-    marginLeft: 10,
+    flex: 1,
     color: "#000000",
   },
 

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getStandings } from "../services/standingsApi";
 import StandingRow from "../components/StandingRow";
 import { useChampionship } from "../context/ChampionshipContext";
+import StandingHeader from "../components/StandingHeader";
 
 export default function StandingsScreen(){
 
@@ -32,6 +33,7 @@ export default function StandingsScreen(){
 
   return(
     <View style={{ flex: 1 }}>
+        <StandingHeader/>
         <FlatList
           data={standings}
           keyExtractor={(item)=>item.team._id}
