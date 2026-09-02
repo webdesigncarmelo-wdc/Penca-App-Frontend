@@ -19,7 +19,7 @@ export default function HomeScreen() {
 
         <View
           style={[ styles.screen, 
-            { width: isPhone ? "100%" : "55%" } ]}>
+            { width: isPhone ? "100%" : "50%" } ]}>
               
           <View style={styles.header}>
 

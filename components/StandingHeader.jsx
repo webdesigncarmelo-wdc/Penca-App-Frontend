@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: "#c0c0c0",
 
-    paddingHorizontal:12,
-    paddingVertical:12,
+    paddingHorizontal:0,
+    paddingVertical:6,
 
     borderBottomWidth:1,
     borderBottomColor:"#000000",

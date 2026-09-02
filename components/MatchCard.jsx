@@ -2,76 +2,81 @@ import { View, Text, StyleSheet } from "react-native";
 import ShieldBadge from "./ShieldBadge";
 import MatchScore from "./MatchScore";
 import { teamImages } from "../assets/clubs/teamImages";
+import { useWindowDimensions } from "react-native";
 
-export default function MatchCard({ homeTeam, awayTeam, homeGoals, awayGoals, matchday }) {
-   return (
+export default function MatchCard({ match }) {
+
+  // date render
+  const date = match.date
+  ? new Date(match.date)
+  : new Date("2026-07-30T16:00:00-03:00");
+
+  // responsive
+  const { width } = useWindowDimensions();
+  const isSmall = width < 800;
+
+  return (
     <View style={styles.cardContainer}>
 
       {/* Info contextual */}
       <View style={styles.infoRow}>
+
         <Text style={styles.infoText}>
-          Fecha {matchday.number}
+          {match.matchday.name}
         </Text>
+
         <Text style={styles.infoText}>
-            •
+          {date.toLocaleDateString("es-UY", {
+            day: "numeric", month: "long",
+            timeZone: "America/Montevideo",
+          })}
         </Text>
+
         <Text style={styles.infoText}>
-          Domingo 9/8
+          {date.toLocaleTimeString("es-UY", {
+            hour: "2-digit", minute: "2-digit",
+            timeZone: "America/Montevideo",
+          })}
         </Text>
-        <Text style={styles.infoText}>
-            •
-        </Text>
-        <Text style={styles.infoText}>
-          16 : 00
-        </Text>
-        <Text style={styles.infoText}>
-            •
-        </Text>
+
         <Text style={styles.infoText}>
           Parque Artigas
         </Text>
+
       </View>
 
       {/* Partido */}
       <View style={styles.matchRow}>
 
         {/* Local */}
-        <View style={styles.teamContainer}>
-          <ShieldBadge
-            image={teamImages[homeTeam.image]}
-            size={55}
-          />
-
-          <Text
-            style={styles.teamName}
-            numberOfLines={1}
-          >
-            {homeTeam.name}
+        <View style={[styles.teamContainer, styles.teamLeft]}>
+          <Text style={styles.teamName} numberOfLines={1}>
+            {isSmall ? match.homeTeam.shortName.toUpperCase() : match.homeTeam.name}
           </Text>
+          <ShieldBadge
+            image={teamImages[match.homeTeam.image]}
+            size={45}
+          />
         </View>
 
         {/* Resultado */}
         <View style={styles.scoreContainer}>
-          <MatchScore score={homeGoals} />
+          <MatchScore score={match.homeGoals} />
 
           <Text style={styles.separator}>-</Text>
 
-          <MatchScore score={awayGoals} />
+          <MatchScore score={match.awayGoals} />
         </View>
 
         {/* Visitante */}
-        <View style={[styles.teamContainer, styles.teamRight]}>
-          <Text
-            style={styles.teamName}
-            numberOfLines={1}
-          >
-            {awayTeam.name}
-          </Text>
-
+        <View style={styles.teamContainer}>
           <ShieldBadge
-            image={teamImages[awayTeam.image]}
-            size={55}
+            image={teamImages[match.awayTeam.image]}
+            size={45}
           />
+          <Text style={styles.teamName} numberOfLines={1}>
+            {isSmall ? match.awayTeam.shortName.toUpperCase() : match.awayTeam.name}
+          </Text>
         </View>
 
       </View>
@@ -83,20 +88,12 @@ export default function MatchCard({ homeTeam, awayTeam, homeGoals, awayGoals, ma
 const styles = StyleSheet.create({
 
   cardContainer: {
-    width: "50%",
-    minWidth: 700,
+    width: "99%",
 
     alignSelf: "center",
-
     backgroundColor: "#ffffff",
 
-    marginVertical: 8,
-
-    borderRadius: 10,
-
-    borderWidth: 1,
-    borderColor: "#dddddd",
-
+    borderColor: "#e2e2e2",
     overflow: "hidden",
   },
 
@@ -106,7 +103,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f3f3f3",
 
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingVertical: 6,
 
     borderBottomWidth: 1,
     borderBottomColor: "#e5e5e5",
@@ -121,9 +118,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
 
     alignItems: "center",
-
-    paddingHorizontal: 18,
-    paddingVertical: 18,
+    paddingTop: 6,
+    paddingBottom: 15,
   },
 
   teamContainer: {
@@ -132,11 +128,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
 
     alignItems: "center",
-
+    paddingHorizontal: 10,
     gap: 12,
   },
 
-  teamRight: {
+  teamLeft: {
     justifyContent: "flex-end",
   },
 
@@ -149,21 +145,16 @@ const styles = StyleSheet.create({
   },
 
   scoreContainer: {
-    width: 140,
-
+    width: "20%",
     flexDirection: "row",
-
     justifyContent: "space-evenly",
-
     alignItems: "center",
   },
 
   separator: {
-    fontSize: 24,
-
+    fontSize: 10,
     fontWeight: "bold",
-
-    color: "#666",
+    color: "#000000",
   },
 
 });

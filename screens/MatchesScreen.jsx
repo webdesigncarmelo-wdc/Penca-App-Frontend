@@ -27,9 +27,17 @@ export default function MatchesScreen() {
     loadMatches();
   }, [championship]);
 
-  const sortedMatches = [...matches].sort(
-    (a, b) => b.matchday.number - a.matchday.number
-  );
+  const sortedMatches = [...matches].sort((a, b) => {
+  const matchdayA = Number(a.matchday.name.split(" ")[1]);
+  const matchdayB = Number(b.matchday.name.split(" ")[1]);
+
+  // Primero: Fecha 5, Fecha 4, Fecha 3...
+  if (matchdayA !== matchdayB) {
+    return matchdayB - matchdayA;
+  }
+  // Segundo: fecha/hora del partido, más reciente primero
+    return new Date(b.date) - new Date(a.date);
+  });
 
   return (
     <View style={styles.container}>
@@ -38,11 +46,7 @@ export default function MatchesScreen() {
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
           <MatchCard
-            matchday={item.matchday}
-            homeTeam={item.homeTeam}
-            awayTeam={item.awayTeam}
-            homeGoals={item.homeGoals}
-            awayGoals={item.awayGoals}
+            match={item}
           />
         )}
       />

@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     overflow: 'hidden',
 
-    borderColor: '#16235f',
-    borderWidth: 3,
+    borderColor: '#000000',
+    borderWidth: 1,
 
     borderRadius: 50,
 

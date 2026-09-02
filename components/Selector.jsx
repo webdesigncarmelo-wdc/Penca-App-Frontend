@@ -291,14 +291,14 @@ export default function Selector() {
 const styles = StyleSheet.create({
 
   container: {
-    width: "100%",
-    maxWidth: "50%",
+    width: "50%",
   },
 
   selector: {
-    minWidth: 150,
+    minWidth: 280,
     flexShrink: 1,
 
+    paddingTop: 10,
     paddingHorizontal: 10,
     paddingVertical: 10,
 
@@ -309,10 +309,9 @@ const styles = StyleSheet.create({
 
   title: {
     flex: 1,
-    marginHorizontal: 8,
 
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: "500",
     textAlign: "center",
   },
 

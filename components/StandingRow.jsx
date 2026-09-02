@@ -1,8 +1,14 @@
 import { View, Text, StyleSheet } from "react-native";
 import ShieldBadge from "./ShieldBadge.jsx";
 import { teamImages } from "../assets/clubs/teamImages";
+import { useWindowDimensions } from "react-native";
 
 export default function StandingRow({ team, position }) {
+
+  // responsive
+  const { width } = useWindowDimensions();
+  const isSmall = width < 800;
+
   return (
     <View style={styles.row}>
 
@@ -25,11 +31,8 @@ export default function StandingRow({ team, position }) {
 
       {/* Equipo */}
       <View style={styles.nameColumn}>
-        <Text 
-          style={styles.teamName}
-          numberOfLines={1}
-        >
-          {team.team.name}
+        <Text style={styles.teamName} numberOfLines={1}>
+          {isSmall ? team.team.shortName.toUpperCase() : team.team.name}
         </Text>
       </View>
 
@@ -82,14 +85,15 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     alignItems: "center",
+    height: 52,
 
     width: "100%",
     alignSelf: "center",
 
     backgroundColor: "#ffffff",
 
-    paddingHorizontal: 12,
-    paddingVertical: 7,
+    paddingHorizontal: 0,
+    paddingVertical: 5,
 
     borderBottomWidth: 1,
     borderBottomColor: "#eeeeee",
