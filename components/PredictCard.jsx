@@ -1,13 +1,12 @@
 import { View, Text, StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
-import ShieldBadge from "./ShieldBadge";
-import MatchScore from "./MatchScore";
-import { teamImages } from "../assets/clubs/teamImages";
+import MatchCard from "./MatchCard";
 import ButtonCard from "./ButtonCard"
 import GoalPicker from "./GoalPicker";
 import { savePredict } from "../services/predictsApi";
+import { useWindowDimensions } from "react-native";
 
-export default function PredictCard({ homeTeam, awayTeam, homeGoals, awayGoals, matchday, matchId, userId, predict }) {
+export default function PredictCard({ match, predict, userId }) {
 
   const [homePrediction, setHomePrediction] = useState(0);
   const [awayPrediction, setAwayPrediction] = useState(0);
@@ -25,78 +24,24 @@ export default function PredictCard({ homeTeam, awayTeam, homeGoals, awayGoals, 
     }
   }, [predict]);
 
-   return (
+  // date render
+  const date = match.date
+  ? new Date(match.date)
+  : new Date("2026-07-30T16:00:00-03:00");
+
+  // responsive
+  const { width } = useWindowDimensions();
+  const isSmall = width < 800;
+
+  return (
     <View style={styles.cardContainer}>
 
-      {/* Info contextual */}
-      <View style={styles.infoRow}>
-        <Text style={styles.infoText}>
-          Fecha {matchday.number}
-        </Text>
-        <Text style={styles.infoText}>
-           •
-        </Text>
-        <Text style={styles.infoText}>
-          Domingo 9/8
-        </Text>
-        <Text style={styles.infoText}>
-           •
-        </Text>
-        <Text style={styles.infoText}>
-          16 : 00
-        </Text>
-        <Text style={styles.infoText}>
-           •
-        </Text>
-        <Text style={styles.infoText}>
-          Parque Artigas
-        </Text>
+      {/* Match Pending */}
+      <View>
+       <MatchCard match={match} noBorder />
       </View>
 
-      {/* Partido */}
-      <View style={styles.matchRow}>
-
-        {/* Local */}
-        <View style={styles.teamContainer}>
-          <ShieldBadge
-            image={teamImages[homeTeam.image]}
-            size={55}
-          />
-
-          <Text
-            style={styles.teamName}
-            numberOfLines={1}
-          >
-            {homeTeam.name}
-          </Text>
-        </View>
-
-        {/* Resultado */}
-        <View style={styles.scoreContainer}>
-          <MatchScore score={homeGoals} />
-
-          <Text style={styles.separator}>-</Text>
-
-          <MatchScore score={awayGoals} />
-        </View>
-
-        {/* Visitante */}
-        <View style={[styles.teamContainer, styles.teamRight]}>
-          <Text
-            style={styles.teamName}
-            numberOfLines={1}
-          >
-            {awayTeam.name}
-          </Text>
-
-          <ShieldBadge
-            image={teamImages[awayTeam.image]}
-            size={55}
-          />
-        </View>
-
-      </View>
-
+      {/* Predict */}
       <View style={styles.predictRow}>
         <GoalPicker
           value={homePrediction}
@@ -104,11 +49,12 @@ export default function PredictCard({ homeTeam, awayTeam, homeGoals, awayGoals, 
         />
 
         <ButtonCard
-          width="30%"
+          width="28%"
           onPress={() => {
             setSaved(true);
             savePredict(
-              matchId, userId,
+              matchId = match._id, 
+              userId,
               homePrediction,
               awayPrediction
             )
@@ -128,104 +74,28 @@ export default function PredictCard({ homeTeam, awayTeam, homeGoals, awayGoals, 
 const styles = StyleSheet.create({
 
   cardContainer: {
-    width: "50%",
-    minWidth: 700,
+    width: "99%",
 
     alignSelf: "center",
-
     backgroundColor: "#ffffff",
 
-    marginVertical: 8,
-
-    borderRadius: 10,
-
-    borderWidth: 1,
-    borderColor: "#dddddd",
-
+    borderColor: "#e2e2e2",
     overflow: "hidden",
-  },
-
-  infoRow: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    backgroundColor: "#f3f3f3",
-
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-
-    borderBottomWidth: 1,
-    borderBottomColor: "#e5e5e5",
-  },
-
-  infoText: {
-    fontSize: 13,
-    color: "#666",
-  },
-
-  matchRow: {
-    flexDirection: "row",
-
-    alignItems: "center",
-
-    paddingHorizontal: 18,
-    paddingTop: 18,
-  },
-
-
-teamContainer: {
-    flex: 1,
-
-    flexDirection: "row",
-
-    alignItems: "center",
-
-    gap: 12,
-  },
-
-  teamRight: {
-    justifyContent: "flex-end",
-  },
-
-  teamName: {
-    fontSize: 20,
-
-    color: "#222",
-
-    fontWeight: "600",
-  },
-
-  scoreContainer: {
-    width: 140,
-
-    flexDirection: "row",
-
-    justifyContent: "space-evenly",
-
-    alignItems: "center",
-  },
-
-  separator: {
-    fontSize: 24,
-
-    fontWeight: "bold",
-
-    color: "#666",
+    borderRadius: 10,
+    borderWidth: 1,
+    marginVertical: 2,
   },
 
   predictRow: {
-    width: "70%",
+    width: "99%",
 
     alignSelf: "center",
 
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    marginTop: -16,
+    paddingButton: 20,
   },
-
-  success: {
-    color: "white",
-    fontSize: 24,
-    fontWeight: "700",
-  }
 
 });

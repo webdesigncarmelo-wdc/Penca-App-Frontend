@@ -47,32 +47,32 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
+    gap: 5,
   },
 
   button: {
-    width: 32,
-    height: 32,
+    width: 40,
+    height: 40,
 
-    borderRadius: 16,
+    borderRadius: 30,
 
-    backgroundColor: "#eeeeee",
+    backgroundColor: "#e6e6e6",
 
     alignItems: "center",
     justifyContent: "center",
   },
 
   buttonText: {
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: "600",
   },
 
   value: {
-    minWidth: 25,
+    minWidth: "1%",
 
     textAlign: "center",
 
-    fontSize: 20,
+    fontSize: 40,
     fontWeight: "700",
   },
 

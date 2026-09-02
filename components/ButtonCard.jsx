@@ -1,10 +1,6 @@
 import { Pressable, Text, StyleSheet } from "react-native";
 
-export default function AppButton({
-  children,
-  onPress,
-  width = "100%",
-}) {
+export default function AppButton({ children, onPress, width = "25%",}) {
   return (
     <Pressable
       style={[styles.button, { width }]}
@@ -19,22 +15,20 @@ export default function AppButton({
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: 10,
-
     backgroundColor: "#1976D2",
 
-    borderRadius: 50,
+    borderRadius: 30,
 
     paddingVertical: 10,
+    marginHorizontal: "1%",
 
     alignItems: "center",
     alignSelf: "center",
-
-    margin: 10,
+    height: 40,
   },
 
   buttonText: {
     color: "#FFF",
-    fontWeight: "700",
+    fontWeight: "600",
   },
 });

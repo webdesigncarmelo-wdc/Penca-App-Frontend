@@ -4,7 +4,7 @@ import MatchScore from "./MatchScore";
 import { teamImages } from "../assets/clubs/teamImages";
 import { useWindowDimensions } from "react-native";
 
-export default function MatchCard({ match }) {
+export default function MatchCard({ match, noBorder }) {
 
   // date render
   const date = match.date
@@ -16,7 +16,7 @@ export default function MatchCard({ match }) {
   const isSmall = width < 800;
 
   return (
-    <View style={styles.cardContainer}>
+    <View style={[styles.cardContainer, noBorder && styles.noBorder]}>
 
       {/* Info contextual */}
       <View style={styles.infoRow}>
@@ -95,6 +95,13 @@ const styles = StyleSheet.create({
 
     borderColor: "#e2e2e2",
     overflow: "hidden",
+    borderRadius: 1,
+    borderWidth: 1,
+    marginVertical: 3,
+  },
+
+  noBorder: {
+    borderWidth: 0,
   },
 
   infoRow: {
@@ -118,8 +125,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
 
     alignItems: "center",
-    paddingTop: 6,
-    paddingBottom: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
 
   teamContainer: {

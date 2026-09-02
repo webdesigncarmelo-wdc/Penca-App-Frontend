@@ -27,9 +27,10 @@ export default function PredictsScreen() {
     } loadMatches();
   }, [championship]);
 
-  const sortedMatches = [...matches].sort(
-    (a, b) => a.matchday.number - b.matchday.number
-  );
+  // ordenar partidos
+  const sortedMatches = [...matches].sort((a, b) => {
+    return new Date(a.date) - new Date(b.date) ;
+  });
 
   const [predicts, setPredicts] = useState([]);
 
@@ -56,12 +57,7 @@ export default function PredictsScreen() {
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
           <PredictCard
-            matchday={item.matchday}
-            homeTeam={item.homeTeam}
-            awayTeam={item.awayTeam}
-            homeGoals={item.homeGoals}
-            awayGoals={item.awayGoals}
-            matchId={item._id}
+            match={item}
             userId = "6a76068def7454b0fd1861dd"
             predict={linker(item._id, predicts)}
           />

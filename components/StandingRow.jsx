@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 52,
 
-    width: "100%",
+    width: "95%",
     alignSelf: "center",
 
     backgroundColor: "#ffffff",
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
 
     borderBottomWidth: 1,
-    borderBottomColor: "#eeeeee",
+    borderBottomColor: "#e6e6e6",
   },
 
   positionColumn: {
