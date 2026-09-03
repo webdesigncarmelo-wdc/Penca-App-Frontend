@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
 
     // Regulá este valor
     backgroundColor: "rgba(255,255,255,0.00)",
+    paddingHorizontal: 2
   },
 
 });

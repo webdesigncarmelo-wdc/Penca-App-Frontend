@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 52,
 
-    width: "95%",
+    width: "100%",
     alignSelf: "center",
 
     backgroundColor: "#ffffff",
@@ -110,11 +110,6 @@ const styles = StyleSheet.create({
     color: "#555",
   },
 
-  shieldColumn: {
-    width: 48,
-    alignItems: "center",
-  },
-
   nameColumn: {
     flex: 1,
     paddingLeft: 6,
@@ -126,8 +121,10 @@ const styles = StyleSheet.create({
     color: "#222",
   },
 
+
+
   statColumn: {
-    width: 40,
+    width: "7%",
     alignItems: "center",
   },
 
@@ -137,7 +134,7 @@ const styles = StyleSheet.create({
   },
 
   pointsColumn: {
-    width: 50,
+    width: "10%",
     alignItems: "center",
   },
 
@@ -146,5 +143,4 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#222",
   },
-
 });

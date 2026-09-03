@@ -36,7 +36,17 @@ export default function ProfileCard({ logout, compact }) {
             >
                 <View style={styles.modalOverlay}>
 
+                    
+
                     <View style={styles.panel}>
+
+                        {/* CERRAR */}
+                        <Pressable
+                            style={styles.closeButton}
+                            onPress={() => setVisible(false)}
+                            >
+                            <Text style={styles.closeButtonText}>✕</Text>
+                        </Pressable>
 
                         <Text style={styles.modalTitle}>
                             ¿Cerrar sesión?
@@ -114,6 +124,20 @@ const styles = StyleSheet.create({
 
         paddingVertical: 25,
         paddingHorizontal: 20,
+    },
+
+    closeButton: {
+        alignSelf: "flex-end",
+        padding: 10,
+        paddingHorizontal: 13,
+        borderRadius: 50,
+        borderWidth: 1,
+        marginBottom: -20,
+    },
+
+    closeButtonText: {
+        fontSize: 15,
+        fontWeight: "bold",
     },
 
     modalTitle: {

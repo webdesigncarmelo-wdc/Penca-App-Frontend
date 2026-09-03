@@ -132,6 +132,17 @@ export default function Selector() {
         <View style={styles.modalOverlay}>
           <View style={styles.panel}>
 
+            {/* CERRAR */}
+            <Pressable
+              style={styles.closeButton}
+              onPress={() => {
+                setOpenDropdown(null);
+                setVisible(false);
+              }}
+            >
+              <Text style={styles.closeButtonText}>✕</Text>
+            </Pressable>
+
             {/* COMPETITION */}
 
             <Text style={styles.label}>
@@ -349,6 +360,20 @@ const styles = StyleSheet.create({
 
     marginTop: 15,
     marginBottom: 5,
+  },
+
+  closeButton: {
+    alignSelf: "flex-end",
+    padding: 10,
+    paddingHorizontal: 13,
+    borderRadius: 50,
+    borderWidth: 1,
+    marginBottom: -20,
+  },
+
+  closeButtonText: {
+    fontSize: 15,
+    fontWeight: "bold",
   },
 
   dropdownHeader: {

@@ -81,9 +81,9 @@ const styles = StyleSheet.create({
 
     borderColor: "#e2e2e2",
     overflow: "hidden",
-    borderRadius: 10,
+    borderRadius: 12,
     borderWidth: 1,
-    marginVertical: 2,
+    marginVertical: 1.5,
   },
 
   predictRow: {

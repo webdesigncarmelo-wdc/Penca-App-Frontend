@@ -7,9 +7,8 @@ import { useWindowDimensions } from "react-native";
 export default function MatchCard({ match, noBorder }) {
 
   // date render
-  const date = match.date
-  ? new Date(match.date)
-  : new Date("2026-07-30T16:00:00-03:00");
+  const date = match.date ? new Date(match.date) : new Date("2026-07-30T16:00:00-03:00");
+  
 
   // responsive
   const { width } = useWindowDimensions();
@@ -27,15 +26,27 @@ export default function MatchCard({ match, noBorder }) {
 
         <Text style={styles.infoText}>
           {date.toLocaleDateString("es-UY", {
-            day: "numeric", month: "long",
+            weekday: "long",
             timeZone: "America/Montevideo",
-          })}
+          }).charAt(0).toUpperCase() +
+            date.toLocaleDateString("es-UY", {
+              weekday: "long",
+              timeZone: "America/Montevideo",
+            }).slice(1)}
+        </Text>
+
+        <Text style={styles.infoText}>
+          {date.getDate()}/
+          {date.toLocaleDateString("es-UY", {
+            month: "short",
+            timeZone: "America/Montevideo",
+          }).replace(".", "").replace(/^./, (char) => char.toUpperCase())}
         </Text>
 
         <Text style={styles.infoText}>
           {date.toLocaleTimeString("es-UY", {
             hour: "2-digit", minute: "2-digit",
-            timeZone: "America/Montevideo",
+            timeZone: "America/Montevideo", hour12: false,
           })}
         </Text>
 
@@ -88,16 +99,16 @@ export default function MatchCard({ match, noBorder }) {
 const styles = StyleSheet.create({
 
   cardContainer: {
-    width: "99%",
+    width: "100%",
 
     alignSelf: "center",
     backgroundColor: "#ffffff",
 
     borderColor: "#e2e2e2",
     overflow: "hidden",
-    borderRadius: 1,
+    borderRadius: 10,
     borderWidth: 1,
-    marginVertical: 3,
+    marginBottom: 3
   },
 
   noBorder: {
@@ -107,7 +118,7 @@ const styles = StyleSheet.create({
   infoRow: {
     flexDirection: "row",
     justifyContent: "space-around",
-    backgroundColor: "#f3f3f3",
+    backgroundColor: "#dfdfdf",
 
     paddingHorizontal: 16,
     paddingVertical: 6,

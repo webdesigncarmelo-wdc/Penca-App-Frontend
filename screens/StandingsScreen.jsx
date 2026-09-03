@@ -33,9 +33,9 @@ export default function StandingsScreen(){
 
   return(
     <View style={{ flex: 1 }}>
-        <StandingHeader/>
         <FlatList
           data={standings}
+          ListHeaderComponent={<StandingHeader />}
           keyExtractor={(item)=>item.team._id}
           renderItem={({item, index})=>(
             <StandingRow team={ item } position={ index+1 }/>

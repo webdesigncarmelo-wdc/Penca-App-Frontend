@@ -1,6 +1,5 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { StyleSheet } from "react-native";
-
 import MatchesScreen from "../screens/MatchesScreen";
 import StandingsScreen from "../screens/StandingsScreen";
 import PredictsScreen from "../screens/PredictsScreen";
@@ -19,7 +18,7 @@ export default function HomeTabs() {
     >
       <Tab.Screen
         style={styles.name}
-        name="Posiciones"
+        name="Tabla"
         component={StandingsScreen}
       />
 
@@ -31,7 +30,7 @@ export default function HomeTabs() {
 
       <Tab.Screen
         style={styles.name}
-        name="Predicciones"
+        name="Predicts"
         component={PredictsScreen}
       />
 
@@ -58,8 +57,9 @@ const styles = StyleSheet.create({
   },
 
   label: {
-    fontSize: 18,
-    fontWeight: "600",
+    fontSize: 15,
+    fontWeight: "500",
     color: "#222",
+    marginVertical: 15
   },
 });
