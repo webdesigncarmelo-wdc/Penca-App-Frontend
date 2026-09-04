@@ -2,7 +2,7 @@ const API_URL = "http://192.168.1.116:5100";
 
 import { auth0Service } from "./auth0Service";
 
-export default async function api(method, url, options = {}) {
+export default async function api(method, url, options = {}, auth = false ) {
 
     const token = auth0Service();
     
@@ -10,7 +10,7 @@ export default async function api(method, url, options = {}) {
         ...options.headers
     };
 
-    if (token) {
+    if (token && auth) {
         headers.Authorization = `Bearer ${token}`;
     }
 

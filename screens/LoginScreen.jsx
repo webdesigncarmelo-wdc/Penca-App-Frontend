@@ -1,7 +1,7 @@
-import { useAuth0 } from "react-native-auth0";
 import { useEffect, useState } from "react";
 import LoginCard from "../components/LoginCard";
 import ProfileCard from "../components/ProfileCard";
+import { useAuth0 } from "react-native-auth0";
 import { setAccessToken } from "../services/auth0Service";
 import { useWindowDimensions } from "react-native";
 
@@ -37,6 +37,14 @@ export default function LoginScreen() {
             />
         );
     }
+
+    console.log("----------");
+    console.log(user);
+    console.log("----------");
+    console.log(user?.sub);
+    console.log("----------");
+    console.log(user?.email);
+    console.log("----------");
 
     return (
         <ProfileCard

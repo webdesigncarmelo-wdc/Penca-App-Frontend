@@ -3,7 +3,7 @@ import api from "./api";
 export async function getPredicts(filter = {}) {
     const params = new URLSearchParams(filter);
 
-    const response = await api( "GET", `/predicts?${params}` );
+    const response = await api( "GET", `/predicts?${params}`, {}, true );
 
     if (!response.ok) {
         throw new Error("Error al obtener las predicciones");
@@ -12,7 +12,7 @@ export async function getPredicts(filter = {}) {
 }
 
 export async function getPredict(id) {
-    const response = await api( "GET", `/predicts/${id}` );
+    const response = await api( "GET", `/predicts/${id}`, {}, true );
 
     if (!response.ok) {
         throw new Error("Error al obtener la predicción");
@@ -23,8 +23,6 @@ export async function getPredict(id) {
 
 export async function savePredict(matchId, userId, homePrediction, awayPrediction) {
 
-
-
     const response = await api( "POST", `/predicts/`, {
         headers: {
             "Content-Type": "application/json"},
@@ -34,7 +32,7 @@ export async function savePredict(matchId, userId, homePrediction, awayPredictio
             homeGoals: homePrediction,
             awayGoals: awayPrediction,
         })
-    });
+    }, true );
 
     if (!response.ok) {
         throw new Error("Error al guardar la predicción");
