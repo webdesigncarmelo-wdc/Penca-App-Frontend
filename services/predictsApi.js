@@ -6,6 +6,9 @@ export async function getPredicts(filter = {}) {
     const response = await api( "GET", `/predicts?${params}`, {}, true );
 
     if (!response.ok) {
+        console.log("STATUS:", response.status);
+        console.log("RESPONSE:", await response.text());
+
         throw new Error("Error al obtener las predicciones");
     }
     return await response.json();

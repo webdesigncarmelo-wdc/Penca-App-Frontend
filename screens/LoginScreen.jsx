@@ -1,35 +1,57 @@
 import { useEffect, useState } from "react";
+import { useWindowDimensions } from "react-native";
+import { useAuth0 } from "react-native-auth0";
+
 import LoginCard from "../components/LoginCard";
 import ProfileCard from "../components/ProfileCard";
-import { useAuth0 } from "react-native-auth0";
 import { setAccessToken } from "../services/auth0Service";
-import { useWindowDimensions } from "react-native";
 
 export default function LoginScreen() {
 
-    // responsive
     const { width } = useWindowDimensions();
+
     const isCompactHeader = width < 850;
 
     const {
-        getCredentials,
+        getApiCredentials,
         user,
         authorize,
-        clearSession
+        clearSession,
     } = useAuth0();
 
     const [credentials, setCredentials] = useState(null);
 
     useEffect(() => {
-        if (user) {
-            getCredentials().then(credentials => {
+
+        if (!user) return;
+
+        getApiCredentials("https://api.backend.penca.wdc")
+            .then((credentials) => {
+
+                console.log("========== CREDENTIALS ==========");
+                console.log(credentials);
+
+                console.log("ACCESS TOKEN:");
+                console.log(credentials?.accessToken);
+
+                console.log("=================================");
+
                 setCredentials(credentials);
+
                 setAccessToken(credentials?.accessToken);
+            })
+            .catch((error) => {
+
+                console.log("========== ERROR CREDENTIALS ==========");
+                console.log(error);
+                console.log("=======================================");
+
             });
-        }
+
     }, [user]);
 
     if (!user) {
+
         return (
             <LoginCard
                 authorize={authorize}
@@ -41,9 +63,13 @@ export default function LoginScreen() {
     console.log("----------");
     console.log(user);
     console.log("----------");
+
     console.log(user?.sub);
+
     console.log("----------");
+
     console.log(user?.email);
+
     console.log("----------");
 
     return (

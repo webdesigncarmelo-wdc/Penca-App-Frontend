@@ -35,16 +35,19 @@ export default function PredictsScreen() {
   const [predicts, setPredicts] = useState([]);
 
   useEffect(() => {
-    if(!predicts) return;
     async function loadPredicts() {
       try {
-        const data = await getPredicts({ user : "6a76068def7454b0fd1861dd" });
-        setPredicts(data);
+          const data = await getPredicts({
+              user: "6a76068def7454b0fd1861dd"
+          });
+          setPredicts(data);
       } catch (error) {
-        console.error(error);
+          console.error(error);
       }
-    } loadPredicts();
-  }, []);
+    }
+    loadPredicts();
+    // matches es temporal
+  }, [matches]);
 
   function linker(matchId, predicts){
     return predicts.find(predict => predict.match === matchId);
