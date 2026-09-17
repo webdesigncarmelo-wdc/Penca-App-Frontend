@@ -6,7 +6,7 @@ import GoalPicker from "./GoalPicker";
 import { savePredict } from "../services/predictsApi";
 import { useWindowDimensions } from "react-native";
 
-export default function PredictCard({ match, predict, userId }) {
+export default function PredictCard({ match, predict }) {
 
   const [homePrediction, setHomePrediction] = useState(0);
   const [awayPrediction, setAwayPrediction] = useState(0);
@@ -53,8 +53,7 @@ export default function PredictCard({ match, predict, userId }) {
           onPress={() => {
             setSaved(true);
             savePredict(
-              matchId = match._id, 
-              userId,
+              match._id,
               homePrediction,
               awayPrediction
             )
@@ -69,6 +68,10 @@ export default function PredictCard({ match, predict, userId }) {
 
     </View>
   );
+
+  console.log(match._id)
+  console.log(homePrediction)
+  console.log(awayPrediction)
 }
 
 const styles = StyleSheet.create({

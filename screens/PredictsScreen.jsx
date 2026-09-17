@@ -4,79 +4,94 @@ import { getMatches } from "../services/matchesApi";
 import { getPredicts } from "../services/predictsApi";
 import PredictCard from "../components/PredictCard";
 import { useChampionship } from "../context/ChampionshipContext";
+import { useAuth0 } from "react-native-auth0";
 
 export default function PredictsScreen() {
 
-  // Variables del Context
-  const {
-    championship,
-    setChampionship
-  } = useChampionship();
+    const {
+        championship,
+    } = useChampionship();
 
-  const [matches, setMatches] = useState([]);
+    // variables de Auth0 
+    const { isLoading, user } = useAuth0();
 
-  useEffect(() => {
-    if (!championship) return;
-    async function loadMatches() {
-      try {
-        const data = await getMatches( championship?._id, {  status: "pending" });
-        setMatches(data);
-      } catch (error) {
-        console.error(error);
-      }
-    } loadMatches();
-  }, [championship]);
+    const [matches, setMatches] = useState([]);
+    const [predicts, setPredicts] = useState([]);
 
-  // ordenar partidos
-  const sortedMatches = [...matches].sort((a, b) => {
-    return new Date(a.date) - new Date(b.date) ;
-  });
 
-  const [predicts, setPredicts] = useState([]);
+    // cargo los partidos
+    useEffect(() => {
+        if (!championship) return;
+        async function loadMatches() {
+            try {
+                const data = await getMatches(
+                    championship._id,
+                    {
+                        status: "pending"
+                    }
+                );
+                setMatches(data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        loadMatches();
+    }, [championship]);
 
-  useEffect(() => {
-    async function loadPredicts() {
-      try {
-          const data = await getPredicts({
-              user: "6a76068def7454b0fd1861dd"
-          });
-          setPredicts(data);
-      } catch (error) {
-          console.error(error);
-      }
+
+    // cargo las predicciones
+    useEffect(() => {
+
+        // condiciones para getPredicts()
+        if(isLoading) return
+        if(!user) return
+
+        async function loadPredicts() {
+            try {
+                const data = await getPredicts();
+                setPredicts(data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        loadPredicts();
+    }, [user, matches]);
+
+
+    function linker(matchId, predicts) {
+        return predicts.find(
+            predict => predict.match === matchId
+        );
     }
-    loadPredicts();
-    // matches es temporal
-  }, [matches]);
 
-  function linker(matchId, predicts){
-    return predicts.find(predict => predict.match === matchId);
-  }
+    const sortedMatches = [...matches].sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
 
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={sortedMatches}
-        keyExtractor={(item) => item._id}
-        renderItem={({ item }) => (
-          <PredictCard
-            match={item}
-            userId = "6a76068def7454b0fd1861dd"
-            predict={linker(item._id, predicts)}
-          />
-        )}
-      />
-    </View>
-  );
+    });
+
+
+    return (
+        <View style={styles.container}>
+            <FlatList
+                data={sortedMatches}
+                keyExtractor={(item) => item._id}
+                renderItem={({ item }) => (
+                    <PredictCard
+                        match={item}
+                        predict={linker(item._id, predicts)}
+                    />
+                )}
+            />
+        </View>
+    );
 }
+
 
 const styles = StyleSheet.create({
 
-  container: {
-    flex: 1,
-
-    // Regulá este valor
-    backgroundColor: "rgba(255,255,255,0.00)",
-  },
+    container: {
+        flex: 1,
+        backgroundColor: "rgba(255,255,255,0.00)",
+    },
 
 });

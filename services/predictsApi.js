@@ -24,13 +24,12 @@ export async function getPredict(id) {
     return response.json();
 }
 
-export async function savePredict(matchId, userId, homePrediction, awayPrediction) {
+export async function savePredict(matchId, homePrediction, awayPrediction) {
 
     const response = await api( "POST", `/predicts/`, {
         headers: {
             "Content-Type": "application/json"},
         body: JSON.stringify({
-            user: userId,
             match: matchId,
             homeGoals: homePrediction,
             awayGoals: awayPrediction,

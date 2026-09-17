@@ -26,6 +26,7 @@ module.exports = {
     },
 
     plugins: [
+        "@clerk/expo",
         "expo-font",
         "expo-status-bar",
         [

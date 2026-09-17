@@ -2,29 +2,32 @@ const API_URL = "http://192.168.1.116:5100";
 
 import { auth0Service } from "./auth0Service";
 
-export default async function api(method, url, options = {}, auth = false ) {
+export default async function api(method, url, options = {}, auth = false) {
 
-    console.log("API LLAMADA:", method, url, "AUTH:", auth);
+    let token;
 
-    const token = auth0Service();
-    
+    if (auth) {
+        token = await auth0Service();
+
+        console.log(
+            "TOKEN RECIBIDO API:",
+            token ? `${token.slice(0, 30)}...${token.slice(-10)}` : "NO"
+        );
+    }
+
     const headers = {
         ...options.headers
     };
 
-    if (token && auth) {
+    if (token) {
         headers.Authorization = `Bearer ${token}`;
     }
-
-    console.log("TOKEN QUE MANDA API:", token);
 
     const response = await fetch(`${API_URL}${url}`, {
         ...options,
         method,
         headers
     });
-    
-    console.log("HEADERS:", headers);
 
     return response;
 }

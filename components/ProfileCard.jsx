@@ -19,11 +19,15 @@ export default function ProfileCard({ logout, compact }) {
             <View style={[styles.auth, compact && styles.authCompact]}>
 
                 <Pressable>
-                    <Text style={styles.title}>Perfil</Text>
+                    <Text style={styles.title}>
+                        Perfil
+                    </Text>
                 </Pressable>
 
                 <Pressable onPress={() => setVisible(true)}>
-                    <Text style={styles.title}>Cerrar sesión</Text>
+                    <Text style={styles.title}>
+                        Cerrar sesión
+                    </Text>
                 </Pressable>
 
             </View>
@@ -36,16 +40,15 @@ export default function ProfileCard({ logout, compact }) {
             >
                 <View style={styles.modalOverlay}>
 
-                    
-
                     <View style={styles.panel}>
 
-                        {/* CERRAR */}
                         <Pressable
                             style={styles.closeButton}
                             onPress={() => setVisible(false)}
-                            >
-                            <Text style={styles.closeButtonText}>✕</Text>
+                        >
+                            <Text style={styles.closeButtonText}>
+                                ✕
+                            </Text>
                         </Pressable>
 
                         <Text style={styles.modalTitle}>
