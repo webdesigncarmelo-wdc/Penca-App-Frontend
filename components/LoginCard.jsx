@@ -1,35 +1,9 @@
-import {
-    View,
-    Text,
-    StyleSheet,
-    Pressable,
-} from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-export default function LoginCard({ authorize, compact }) {
+export default function LoginCard({ compact }) {
 
-    const handleLogin = async () => {
-
-        try {
-
-            await authorize(
-                {
-                    audience: "https://api.backend.penca.wdc",
-                    scope: "openid profile email offline_access",
-                },
-                {
-                    customScheme: "pencawdc",
-                }
-            );
-
-        } catch (error) {
-
-            console.log(
-                "Error al iniciar sesión:",
-                error
-            );
-
-        }
-    };
+    const navigation = useNavigation();
 
     return (
         <View
@@ -39,7 +13,7 @@ export default function LoginCard({ authorize, compact }) {
             ]}
         >
 
-            <Pressable onPress={handleLogin}>
+            <Pressable onPress={() => navigation.navigate("ClerkSignIn")}>
                 <Text style={styles.title}>
                     Iniciar sesión
                 </Text>
