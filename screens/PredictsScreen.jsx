@@ -4,20 +4,15 @@ import { getMatches } from "../services/matchesApi";
 import { getPredicts } from "../services/predictsApi";
 import PredictCard from "../components/PredictCard";
 import { useChampionship } from "../context/ChampionshipContext";
-import { useAuth0 } from "react-native-auth0";
+import { useUser } from "@clerk/expo";
 
 export default function PredictsScreen() {
 
-    const {
-        championship,
-    } = useChampionship();
-
-    // variables de Auth0 
-    const { isLoading, user } = useAuth0();
-
     const [matches, setMatches] = useState([]);
     const [predicts, setPredicts] = useState([]);
-
+    
+    const { championship } = useChampionship();
+    const { user } = useUser();
 
     // cargo los partidos
     useEffect(() => {
@@ -42,10 +37,8 @@ export default function PredictsScreen() {
     // cargo las predicciones
     useEffect(() => {
 
-        // condiciones para getPredicts()
-        if(isLoading) return
         if(!user) return
-
+        
         async function loadPredicts() {
             try {
                 const data = await getPredicts();

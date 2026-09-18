@@ -1,7 +1,9 @@
 import { useWindowDimensions } from "react-native";
+import { useEffect } from 'react';
 import { useUser, useAuth } from "@clerk/expo";
 import LoginCard from "../components/LoginCard";
 import ProfileCard from "../components/ProfileCard";
+import { setAccessToken } from "../services/ClerkAuthService.js"
 
 export default function LoginScreen() {
 
@@ -9,9 +11,24 @@ export default function LoginScreen() {
 
     const isCompactHeader = width < 850;
 
-    const { signOut } = useAuth();
+    const { signOut, getToken } = useAuth();
     const { user } = useUser();
-    console.log("CLERK USER:", user);
+
+    useEffect(() => {
+        console.log("START")
+         const getterToken = async () => {
+            if (!user) {
+                setAccessToken(null);
+                console.log("NULL")
+                return;
+            }
+            const token = await getToken();
+            setAccessToken(token);
+            console.log(token)
+        };
+
+        getterToken();
+    }, [user]);
 
     if (!user) {
         return (
