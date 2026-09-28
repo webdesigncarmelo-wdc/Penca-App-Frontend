@@ -8,8 +8,8 @@ import { useWindowDimensions } from "react-native";
 
 export default function PredictCard({ match, predict }) {
 
-  const [homePrediction, setHomePrediction] = useState(0);
-  const [awayPrediction, setAwayPrediction] = useState(0);
+  const [homePrediction, setHomePrediction] = useState("X");
+  const [awayPrediction, setAwayPrediction] = useState("X");
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
@@ -18,8 +18,8 @@ export default function PredictCard({ match, predict }) {
         setAwayPrediction(predict.awayGoals);
         setSaved(true);
     } else {
-        setHomePrediction(0);
-        setAwayPrediction(0);
+        setHomePrediction("X");
+        setAwayPrediction("X");
         setSaved(false);
     }
   }, [predict]);

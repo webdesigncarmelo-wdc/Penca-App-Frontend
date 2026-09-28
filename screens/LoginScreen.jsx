@@ -15,16 +15,13 @@ export default function LoginScreen() {
     const { user } = useUser();
 
     useEffect(() => {
-        console.log("START")
          const getterToken = async () => {
             if (!user) {
                 setAccessToken(null);
-                console.log("NULL")
                 return;
             }
             const token = await getToken();
             setAccessToken(token);
-            console.log(token)
         };
 
         getterToken();

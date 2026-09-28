@@ -8,9 +8,9 @@ export default async function api(method, url, options = {}, auth = false) {
 
     if (auth) {
         token = await getAccessToken();
-        console.log("TOKEN RECIBIDO API:",
+        /*console.log("TOKEN RECIBIDO API:",
             token ? `${token.slice(0, 30)}...${token.slice(-10)}` : "NO"
-        );
+        );*/
     }
 
     const headers = {
